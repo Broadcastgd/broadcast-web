@@ -1,222 +1,652 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Broadcast</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Broadcast</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  <style>
+    :root {
+      --bg: #E8D0CD;
+      --bg-soft: #f4e9e7;
+      --text: #363930;
+      --olive: #6d7063;
+      --line: rgba(54, 57, 48, 0.16);
+      --line-light: rgba(255, 255, 255, 0.16);
+      --white-soft: rgba(255, 255, 255, 0.38);
+      --shadow: 0 10px 30px rgba(54, 57, 48, 0.08);
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 14px;
+      --container: 1280px;
+    }
 
-body {
-  font-family: 'Archivo', sans-serif;
-  background: #E8D0CD;
-  color: #363930;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* HERO */
-.hero {
-  height: 90vh;
-  background: url('imagen-broadcast-home.png') right/cover no-repeat;
-  display: flex;
-  align-items: center;
-  padding: 80px;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-.hero-text {
-  max-width: 500px;
-}
+    body {
+      font-family: "Archivo", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
 
-.hero h1 {
-  font-size: 56px;
-  font-weight: 600;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-.hero p {
-  margin-top: 20px;
-  font-size: 18px;
-}
+    img {
+      display: block;
+      max-width: 100%;
+    }
 
-.btn {
-  margin-top: 30px;
-  display: inline-block;
-  padding: 12px 22px;
-  border-radius: 30px;
-  border: 1px solid #363930;
-  text-decoration: none;
-  color: #363930;
-}
+    .container {
+      width: min(var(--container), calc(100% - 48px));
+      margin: 0 auto;
+    }
 
-/* QUE HACEMOS */
-.section {
-  padding: 80px;
-  display: flex;
-  align-items: center;
-  gap: 60px;
-}
+    .section {
+      padding: 88px 0;
+    }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.7rem);
+      line-height: 0.95;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
 
-.card {
-  padding: 20px;
-  border-radius: 14px;
-  border: 1px solid #bfa8a5;
-  background: rgba(255,255,255,0.4);
-  backdrop-filter: blur(6px);
-}
+    .section-text {
+      font-size: 1.08rem;
+      line-height: 1.45;
+      max-width: 560px;
+    }
 
-/* LOGOS CARRUSEL */
-.logos {
-  overflow: hidden;
-  white-space: nowrap;
-  background: #f3e6e3;
-  padding: 20px 0;
-}
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 22px;
+      border: 1px solid var(--text);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.22);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      color: var(--text);
+      font-size: 0.98rem;
+      font-weight: 500;
+      transition: 0.3s ease;
+    }
 
-.logos-track {
-  display: inline-block;
-  animation: scroll 25s linear infinite;
-}
+    .btn:hover {
+      background: var(--text);
+      color: var(--bg);
+    }
 
-.logos img {
-  height: 40px;
-  margin: 0 40px;
-  opacity: 0.7;
-}
+    .btn-light {
+      border-color: rgba(255,255,255,0.7);
+      color: #f7efee;
+      background: rgba(255,255,255,0.06);
+    }
 
-@keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
+    .btn-light:hover {
+      background: #f7efee;
+      color: var(--olive);
+      border-color: #f7efee;
+    }
 
-/* PORTFOLIO */
-.portfolio {
-  display: flex;
-  overflow: hidden;
-}
+    /* HERO */
+    .hero {
+      min-height: 92vh;
+      background:
+        linear-gradient(90deg, rgba(232,208,205,0.12) 0%, rgba(232,208,205,0.06) 32%, rgba(232,208,205,0.02) 100%),
+        url("images/portfolio/imagen-broadcast-home.png") right center / cover no-repeat;
+      display: flex;
+      align-items: center;
+    }
 
-.project {
-  flex: 1;
-  position: relative;
-}
+    .hero-inner {
+      width: min(var(--container), calc(100% - 48px));
+      margin: 0 auto;
+      padding: 64px 0;
+    }
 
-.project img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  filter: grayscale(100%) brightness(0.6);
-  transition: 0.4s;
-}
+    .hero-logo {
+      width: 90px;
+      margin-bottom: 24px;
+    }
 
-.project:hover img {
-  filter: none;
-}
+    .hero-content {
+      max-width: 520px;
+    }
 
-/* CONTACTO */
-.contact {
-  background: #363930;
-  color: white;
-  padding: 80px;
-  text-align: center;
-}
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 5rem);
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+      font-weight: 700;
+      margin-bottom: 18px;
+      color: #f8f2f1;
+      text-shadow: 0 2px 14px rgba(54, 57, 48, 0.08);
+    }
 
-.contact a {
-  color: white;
-  text-decoration: none;
-}
+    .hero p {
+      max-width: 420px;
+      font-size: 1.1rem;
+      line-height: 1.45;
+      color: #f7efee;
+      margin-bottom: 28px;
+    }
 
-.footer {
-  background: #363930;
-  color: white;
-  padding: 40px;
-  display: flex;
-  justify-content: space-between;
-}
-</style>
+    /* SERVICES */
+    .services-wrap {
+      background: #ead9d7;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      align-items: center;
+      gap: 64px;
+    }
+
+    .services-illustration {
+      max-width: 430px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(150px, 1fr));
+      gap: 16px;
+      margin-top: 30px;
+    }
+
+    .card {
+      min-height: 94px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      background: var(--white-soft);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: var(--shadow);
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    /* LOGOS */
+    .logos {
+      overflow: hidden;
+      background: #f6efed;
+      border-top: 1px solid rgba(54, 57, 48, 0.06);
+      border-bottom: 1px solid rgba(54, 57, 48, 0.06);
+      padding: 22px 0;
+    }
+
+    .logos-track {
+      display: flex;
+      align-items: center;
+      gap: 56px;
+      width: max-content;
+      animation: logos-scroll 34s linear infinite;
+    }
+
+    .logos:hover .logos-track {
+      animation-play-state: paused;
+    }
+
+    .logos img {
+      height: 42px;
+      width: auto;
+      opacity: 0.72;
+      flex-shrink: 0;
+      filter: grayscale(100%);
+      transition: 0.25s ease;
+    }
+
+    .logos img:hover {
+      opacity: 1;
+      filter: grayscale(0%);
+    }
+
+    @keyframes logos-scroll {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ABOUT */
+    .about {
+      background: var(--olive);
+      color: #f7efee;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .about h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      margin-bottom: 18px;
+    }
+
+    .about p {
+      font-size: 1.2rem;
+      line-height: 1.4;
+      max-width: 430px;
+      margin-bottom: 28px;
+    }
+
+    .stats {
+      display: grid;
+      gap: 16px;
+    }
+
+    .stat {
+      padding: 18px 20px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line-light);
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .stat strong {
+      display: inline-block;
+      font-size: 2rem;
+      line-height: 1;
+      margin-right: 8px;
+      letter-spacing: -0.03em;
+    }
+
+    /* PORTFOLIO */
+    .portfolio {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      overflow: hidden;
+    }
+
+    .project {
+      position: relative;
+      overflow: hidden;
+      min-height: 310px;
+      background: #d5c5c1;
+    }
+
+    .project img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) brightness(0.72);
+      transition: transform 0.5s ease, filter 0.45s ease;
+    }
+
+    .project::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(54, 57, 48, 0.08);
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    .project:hover img {
+      filter: none;
+      transform: scale(1.06);
+    }
+
+    .project:hover::after {
+      opacity: 0;
+    }
+
+    /* TESTIMONIAL STRIP */
+    .mini-strip {
+      background: var(--bg-soft);
+      padding: 24px 0;
+      border-top: 1px solid rgba(54, 57, 48, 0.06);
+    }
+
+    .mini-strip p {
+      text-align: center;
+      font-size: 0.98rem;
+      opacity: 0.8;
+    }
+
+    /* CONTACT */
+    .contact {
+      background: #f6efed;
+      text-align: center;
+      padding: 92px 0;
+    }
+
+    .contact h2 {
+      font-size: clamp(2rem, 4vw, 2.7rem);
+      margin-bottom: 14px;
+      letter-spacing: -0.03em;
+    }
+
+    .contact p {
+      max-width: 640px;
+      margin: 0 auto 28px;
+      font-size: 1.08rem;
+      line-height: 1.5;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .contact-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.46);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: 0.3s ease;
+      font-weight: 500;
+    }
+
+    .contact-links a:hover {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--olive);
+      color: #f7efee;
+      padding: 34px 0;
+    }
+
+    .footer-inner {
+      width: min(var(--container), calc(100% - 48px));
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .footer-brand img {
+      width: 62px;
+    }
+
+    .footer-socials {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-socials a {
+      opacity: 0.95;
+      transition: 0.25s ease;
+    }
+
+    .footer-socials a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1180px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, minmax(150px, 1fr));
+      }
+
+      .portfolio {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        min-height: 84vh;
+        background-position: 72% center;
+      }
+
+      .hero h1 {
+        max-width: 420px;
+      }
+
+      .services-grid,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-illustration {
+        max-width: 320px;
+      }
+
+      .about p {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container,
+      .hero-inner,
+      .footer-inner {
+        width: min(var(--container), calc(100% - 28px));
+      }
+
+      .section {
+        padding: 64px 0;
+      }
+
+      .hero {
+        align-items: flex-end;
+        padding-bottom: 10px;
+      }
+
+      .hero-logo {
+        width: 74px;
+        margin-bottom: 18px;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .portfolio {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .project {
+        min-height: 220px;
+      }
+
+      .logos img {
+        height: 34px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-text">
-    <h1>Estructura, claridad y propósito.</h1>
-    <p>Ordenamos la comunicación visual de tu empresa.</p>
-    <a class="btn" href="#contacto">Contactanos</a>
-  </div>
-</section>
-
-<!-- QUE HACEMOS -->
-<section class="section">
-  <img src="ilustracion-broadcast.png" width="400">
-  
-  <div>
-    <h2>Qué hacemos</h2>
-    <p>Ordenamos, estructuramos y potenciamos la comunicación visual de tu empresa.</p>
-
-    <div class="grid">
-      <div class="card">Branding e identidad visual</div>
-      <div class="card">Diseño web</div>
-      <div class="card">Redes sociales</div>
-      <div class="card">Presentaciones digitales</div>
-      <div class="card">Consultoría en diseño</div>
-      <div class="card">Papelería y packaging</div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <img class="hero-logo" src="images/portfolio/logo-broadcast-claro-1x1.svg" alt="Broadcast" />
+        <h1>Estructura, claridad y propósito.</h1>
+        <p>Ordenamos la comunicación visual de tu empresa.</p>
+        <a class="btn btn-light" href="#contacto">Contactanos</a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- LOGOS -->
-<section class="logos">
-  <div class="logos-track">
-    <img src="logo1.png">
-    <img src="logo2.png">
-    <img src="logo3.png">
-    <img src="logo4.png">
-    <img src="logo5.png">
-    <img src="logo1.png">
-    <img src="logo2.png">
-    <img src="logo3.png">
-    <img src="logo4.png">
-    <img src="logo5.png">
-  </div>
-</section>
+  <!-- SERVICIOS -->
+  <section class="section services-wrap">
+    <div class="container services-grid">
+      <img class="services-illustration" src="images/portfolio/ilustracion-broadcast.png" alt="Ilustración Broadcast" />
 
-<!-- PORTFOLIO -->
-<section class="portfolio">
-  <div class="project"><img src="p1.jpg"></div>
-  <div class="project"><img src="p2.jpg"></div>
-  <div class="project"><img src="p3.jpg"></div>
-  <div class="project"><img src="p4.jpg"></div>
-</section>
+      <div>
+        <h2 class="section-title">Qué hacemos</h2>
+        <p class="section-text">Ordenamos, estructuramos y potenciamos la comunicación visual de tu empresa.</p>
 
-<!-- CONTACTO -->
-<section id="contacto" class="contact">
-  <h2>Trabajemos juntos</h2>
-  <p>
-    <a href="https://wa.me/5491157219634">WhatsApp</a>  
-    ·  
-    <a href="mailto:hi@broadcastgd.com">hi@broadcastgd.com</a>
-  </p>
-</section>
+        <div class="cards-grid">
+          <div class="card">Branding e identidad visual</div>
+          <div class="card">Diseño web</div>
+          <div class="card">Redes sociales</div>
+          <div class="card">Presentaciones digitales</div>
+          <div class="card">Consultoría en diseño</div>
+          <div class="card">Papelería y packaging</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- FOOTER -->
-<div class="footer">
-  <div>Broadcast</div>
-  <div>
-    <a href="https://www.instagram.com/broadcast.gd/">Instagram</a> ·
-    <a href="https://www.linkedin.com/in/agustinaarolfo">LinkedIn</a>
-  </div>
-</div>
+  <!-- LOGOS CLIENTES -->
+  <section class="logos" aria-label="Clientes">
+    <div class="logos-track">
+      <img src="images/logos-clientes/logo-cliente-broadcast1.png" alt="Cliente Broadcast 1" />
+      <img src="images/logos-clientes/logo-cliente-broadcast2.png" alt="Cliente Broadcast 2" />
+      <img src="images/logos-clientes/logo-cliente-broadcast3.png" alt="Cliente Broadcast 3" />
+      <img src="images/logos-clientes/logo-cliente-broadcast4.png" alt="Cliente Broadcast 4" />
+      <img src="images/logos-clientes/logo-cliente-broadcast5.png" alt="Cliente Broadcast 5" />
+      <img src="images/logos-clientes/logo-cliente-broadcast6.png" alt="Cliente Broadcast 6" />
+      <img src="images/logos-clientes/logo-cliente-broadcast7.png" alt="Cliente Broadcast 7" />
+      <img src="images/logos-clientes/logo-cliente-broadcast8.png" alt="Cliente Broadcast 8" />
+      <img src="images/logos-clientes/logo-cliente-broadcast9.png" alt="Cliente Broadcast 9" />
+      <img src="images/logos-clientes/logo-cliente-broadcast10.png" alt="Cliente Broadcast 10" />
+      <img src="images/logos-clientes/logo-cliente-broadcast11.png" alt="Cliente Broadcast 11" />
+      <img src="images/logos-clientes/logo-cliente-broadcast12.png" alt="Cliente Broadcast 12" />
+      <img src="images/logos-clientes/logo-cliente-broadcast13.png" alt="Cliente Broadcast 13" />
+      <img src="images/logos-clientes/logo-cliente-broadcast14.png" alt="Cliente Broadcast 14" />
+      <img src="images/logos-clientes/logo-cliente-broadcast15.png" alt="Cliente Broadcast 15" />
+
+      <img src="images/logos-clientes/logo-cliente-broadcast1.png" alt="Cliente Broadcast 1" />
+      <img src="images/logos-clientes/logo-cliente-broadcast2.png" alt="Cliente Broadcast 2" />
+      <img src="images/logos-clientes/logo-cliente-broadcast3.png" alt="Cliente Broadcast 3" />
+      <img src="images/logos-clientes/logo-cliente-broadcast4.png" alt="Cliente Broadcast 4" />
+      <img src="images/logos-clientes/logo-cliente-broadcast5.png" alt="Cliente Broadcast 5" />
+      <img src="images/logos-clientes/logo-cliente-broadcast6.png" alt="Cliente Broadcast 6" />
+      <img src="images/logos-clientes/logo-cliente-broadcast7.png" alt="Cliente Broadcast 7" />
+      <img src="images/logos-clientes/logo-cliente-broadcast8.png" alt="Cliente Broadcast 8" />
+      <img src="images/logos-clientes/logo-cliente-broadcast9.png" alt="Cliente Broadcast 9" />
+      <img src="images/logos-clientes/logo-cliente-broadcast10.png" alt="Cliente Broadcast 10" />
+      <img src="images/logos-clientes/logo-cliente-broadcast11.png" alt="Cliente Broadcast 11" />
+      <img src="images/logos-clientes/logo-cliente-broadcast12.png" alt="Cliente Broadcast 12" />
+      <img src="images/logos-clientes/logo-cliente-broadcast13.png" alt="Cliente Broadcast 13" />
+      <img src="images/logos-clientes/logo-cliente-broadcast14.png" alt="Cliente Broadcast 14" />
+      <img src="images/logos-clientes/logo-cliente-broadcast15.png" alt="Cliente Broadcast 15" />
+    </div>
+  </section>
+
+  <!-- QUIÉNES SOMOS -->
+  <section class="section about">
+    <div class="container about-grid">
+      <div>
+        <h2>Quiénes somos</h2>
+        <p>Somos una agencia de diseño enfocada en ayudar a empresas a ordenar, mejorar y potenciar su comunicación visual.</p>
+        <a class="btn btn-light" href="#contacto">Conocé nuestros trabajos</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><strong>+50</strong> identidades visuales desarrolladas</div>
+        <div class="stat"><strong>100%</strong> cumplimiento en tiempos</div>
+        <div class="stat"><strong>+10</strong> rubros abarcados</div>
+        <div class="stat"><strong>Desde 2019</strong> acompañando marcas</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="portfolio" aria-label="Portfolio">
+    <div class="project"><img src="images/portfolio/proyecto-broadcast1.jpg" alt="Proyecto Broadcast 1" /></div>
+    <div class="project"><img src="images/portfolio/proyecto-broadcast2.jpg" alt="Proyecto Broadcast 2" /></div>
+    <div class="project"><img src="images/portfolio/proyecto-broadcast3.jpg" alt="Proyecto Broadcast 3" /></div>
+    <div class="project"><img src="images/portfolio/proyecto-broadcast4.jpg" alt="Proyecto Broadcast 4" /></div>
+    <div class="project"><img src="images/portfolio/proyecto-broadcast5.jpg" alt="Proyecto Broadcast 5" /></div>
+    <div class="project"><img src="images/portfolio/proyecto-broadcast6.jpg" alt="Proyecto Broadcast 6" /></div>
+    <div class="project"><img src="images/portfolio/proyecto-broadcast7.jpg" alt="Proyecto Broadcast 7" /></div>
+    <div class="project"><img src="images/portfolio/proyecto-broadcast8.jpg" alt="Proyecto Broadcast 8" /></div>
+  </section>
+
+  <section class="mini-strip">
+    <div class="container">
+      <p>Diseño con estructura, claridad e intención.</p>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="contact">
+    <div class="container">
+      <h2>Trabajemos juntos</h2>
+      <p>Si querés mejorar la comunicación visual de tu marca, escribinos y armamos una propuesta a medida.</p>
+
+      <div class="contact-links">
+        <a href="https://wa.me/5491157219634" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="mailto:hi@broadcastgd.com">hi@broadcastgd.com</a>
+        <a href="https://www.instagram.com/broadcast.gd/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://www.linkedin.com/in/agustinaarolfo" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://broadcastgd.com" target="_blank" rel="noopener noreferrer">Sitio actual</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="images/portfolio/logo-broadcast-claro-1x1.svg" alt="Broadcast" />
+        <span>Broadcast</span>
+      </div>
+
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/broadcast.gd/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://www.linkedin.com/in/agustinaarolfo" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="mailto:hi@broadcastgd.com">hi@broadcastgd.com</a>
+      </div>
+    </div>
+  </footer>
 
 </body>
 </html>
