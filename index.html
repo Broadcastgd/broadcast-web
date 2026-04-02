@@ -51,7 +51,8 @@
       text-decoration: none;
     }
 
-    img {
+    img,
+    video {
       display: block;
       max-width: 100%;
     }
@@ -83,7 +84,6 @@
       max-width: 560px;
     }
 
-    /* BOTONES */
     .btn,
     .contact-links a,
     .service-cta {
@@ -126,7 +126,6 @@
       line-height: 1;
     }
 
-    /* HEADER */
     .site-header {
       position: fixed;
       inset: 0 0 auto 0;
@@ -184,15 +183,35 @@
       font-weight: 700;
     }
 
-    /* HERO */
     .hero {
       min-height: 92vh;
       display: flex;
       align-items: center;
-      background:
-        linear-gradient(90deg, rgba(232,208,205,0.05) 0%, rgba(232,208,205,0.02) 34%, rgba(232,208,205,0.00) 100%),
-        url("images/imagen-broadcast-home.png") right center / cover no-repeat;
       position: relative;
+      overflow: hidden;
+      background: #b8b5aa;
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(109, 112, 99, 0.5) 0%, rgba(109, 112, 99, 0.18) 36%, rgba(109, 112, 99, 0.1) 100%),
+        linear-gradient(180deg, rgba(54, 57, 48, 0.12) 0%, rgba(54, 57, 48, 0.3) 100%);
+    }
+
+    .hero-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
     }
 
     .hero-inner {
@@ -200,6 +219,8 @@
       margin: 0 auto;
       padding-top: 90px;
       padding-bottom: 56px;
+      position: relative;
+      z-index: 1;
     }
 
     .hero-content {
@@ -213,7 +234,7 @@
       font-weight: 700;
       margin-bottom: 20px;
       color: #f8f2f1;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
     }
 
     .hero p {
@@ -224,7 +245,6 @@
       margin-bottom: 28px;
     }
 
-    /* SERVICIOS BLOQUE SIMPLE */
     .services-wrap {
       background: #ead9d7;
     }
@@ -258,7 +278,7 @@
       padding: 18px;
       border-radius: var(--radius-md);
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.4);
+      background: rgba(255, 255, 255, 0.4);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       box-shadow: var(--shadow);
@@ -266,7 +286,6 @@
       line-height: 1.2;
     }
 
-    /* LOGOS */
     .logos {
       overflow: hidden;
       background: #f6efed;
@@ -306,7 +325,6 @@
       to { transform: translateX(-50%); }
     }
 
-    /* ABOUT */
     .about {
       background: var(--olive);
       color: #f7efee;
@@ -342,7 +360,7 @@
       padding: 18px 20px;
       border-radius: var(--radius-md);
       border: 1px solid var(--line-light);
-      background: rgba(255,255,255,0.06);
+      background: rgba(255, 255, 255, 0.06);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
     }
@@ -355,7 +373,6 @@
       letter-spacing: -0.03em;
     }
 
-    /* PORTFOLIO */
     .portfolio {
       display: grid;
       grid-template-columns: repeat(8, 1fr);
@@ -395,25 +412,29 @@
       opacity: 0;
     }
 
-    /* SERVICIOS DESTACADOS */
     .services-feature {
       background: var(--olive-soft);
       color: var(--white);
     }
 
+    .services-feature .container {
+      max-width: 980px;
+    }
+
     .services-feature .section-head {
-      margin-bottom: 34px;
+      margin-bottom: 22px;
     }
 
     .services-kicker {
-      font-size: 1.05rem;
-      margin-bottom: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
       opacity: 0.95;
     }
 
     .services-feature .section-title {
       color: #f8f2f1;
       margin-bottom: 0;
+      font-size: clamp(1.9rem, 3.6vw, 2.6rem);
     }
 
     .services-tabs {
@@ -428,8 +449,10 @@
       border: none;
       background: transparent;
       color: rgba(54, 57, 48, 0.8);
-      padding: 14px 18px;
+      padding: 11px 14px;
+      font-size: 0.8rem;
       font-weight: 600;
+      line-height: 1.15;
       cursor: pointer;
       border-right: 1px solid rgba(247, 239, 238, 0.45);
       transition: 0.25s ease;
@@ -443,16 +466,17 @@
       background: #f7efee;
       color: var(--text);
       border-radius: 18px 18px 0 0;
-      box-shadow: 0 4px 14px rgba(54,57,48,0.08);
+      box-shadow: 0 4px 14px rgba(54, 57, 48, 0.08);
     }
 
     .service-panel {
       display: none;
       background: #f7efee;
       color: var(--text);
-      border-radius: 0 var(--radius-xl) var(--radius-xl) var(--radius-xl);
-      padding: 14px;
+      border-radius: 0 24px 24px 24px;
+      padding: 10px;
       box-shadow: none;
+      max-width: 860px;
     }
 
     .service-panel.active {
@@ -461,14 +485,14 @@
 
     .service-card {
       display: grid;
-      grid-template-columns: 1.05fr 1fr;
-      gap: 18px;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 14px;
       align-items: stretch;
     }
 
     .service-image {
       height: 100%;
-      min-height: 380px;
+      min-height: 280px;
       border-radius: 18px;
       overflow: hidden;
     }
@@ -480,41 +504,41 @@
     }
 
     .service-content {
-      padding: 18px 8px 12px 0;
+      padding: 14px 8px 10px 0;
       display: flex;
       flex-direction: column;
     }
 
     .service-category {
-      font-size: 0.98rem;
+      font-size: 0.84rem;
       color: var(--olive);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .service-title {
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(1.8rem, 3vw, 2.35rem);
       line-height: 0.95;
       letter-spacing: -0.04em;
       color: var(--olive-soft);
-      margin-bottom: 22px;
+      margin-bottom: 16px;
       font-weight: 700;
     }
 
     .service-description,
     .service-extra {
-      font-size: 1.08rem;
-      line-height: 1.42;
-      margin-bottom: 20px;
+      font-size: 0.96rem;
+      line-height: 1.4;
+      margin-bottom: 16px;
     }
 
     .service-includes {
-      margin-top: 8px;
-      margin-bottom: 26px;
+      margin-top: 4px;
+      margin-bottom: 18px;
     }
 
     .service-includes h4 {
-      font-size: 1.05rem;
-      margin-bottom: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
     }
 
     .service-includes ul {
@@ -523,9 +547,9 @@
     }
 
     .service-includes li {
-      margin-bottom: 4px;
-      font-size: 1.02rem;
-      line-height: 1.35;
+      margin-bottom: 3px;
+      font-size: 0.92rem;
+      line-height: 1.32;
     }
 
     .service-includes li::before {
@@ -539,20 +563,21 @@
       justify-content: flex-end;
     }
 
-    /* TESTIMONIAL STRIP */
-    .mini-strip {
-      background: var(--bg-soft);
-      padding: 24px 0;
-      border-top: 1px solid rgba(54, 57, 48, 0.06);
+    .service-cta {
+      padding: 10px 18px;
+      font-size: 0.88rem;
+      border-width: 2px;
+      border-color: #dbe3cc;
+      color: var(--olive);
+      background: #edf2e4;
     }
 
-    .mini-strip p {
-      text-align: center;
-      font-size: 0.98rem;
-      opacity: 0.8;
+    .service-cta:hover {
+      background: var(--olive);
+      color: var(--white);
+      border-color: var(--olive);
     }
 
-    /* CONTACT */
     .contact {
       background: #f6efed;
       text-align: center;
@@ -579,7 +604,6 @@
       gap: 14px;
     }
 
-    /* FOOTER */
     .footer {
       background: var(--olive);
       color: #f7efee;
@@ -623,7 +647,6 @@
       text-decoration: underline;
     }
 
-    /* RESPONSIVE */
     @media (max-width: 1180px) {
       .cards-grid {
         grid-template-columns: repeat(2, minmax(150px, 1fr));
@@ -637,8 +660,12 @@
         grid-template-columns: 1fr;
       }
 
+      .service-panel {
+        max-width: none;
+      }
+
       .service-image {
-        min-height: 320px;
+        min-height: 280px;
       }
     }
 
@@ -660,7 +687,10 @@
 
       .hero {
         min-height: 84vh;
-        background-position: 72% center;
+      }
+
+      .hero-media video {
+        object-position: 62% center;
       }
 
       .services-grid,
@@ -679,8 +709,8 @@
       }
 
       .service-tab {
-        font-size: 0.94rem;
-        padding: 12px 14px;
+        font-size: 0.86rem;
+        padding: 10px 12px;
       }
     }
 
@@ -749,23 +779,19 @@
 
       .service-panel {
         border-radius: 20px;
+        padding: 12px;
       }
 
       .service-title {
-        font-size: 2.2rem;
+        font-size: 2rem;
       }
     }
+
     @keyframes floatIllustration {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0px); }
+    }
   </style>
 </head>
 <body>
@@ -786,8 +812,13 @@
   </header>
 
   <main>
-    <!-- HERO -->
     <section class="hero" id="inicio">
+      <div class="hero-media" aria-hidden="true">
+        <video autoplay muted loop playsinline preload="auto">
+          <source src="video/video-broadcast-home.mp4" type="video/mp4" />
+        </video>
+      </div>
+
       <div class="hero-inner">
         <div class="hero-content">
           <h1>Estructura, claridad y propósito.</h1>
@@ -797,7 +828,6 @@
       </div>
     </section>
 
-    <!-- SERVICIOS RESUMEN -->
     <section class="section services-wrap">
       <div class="container services-grid">
         <img class="services-illustration" src="images/ilustracion-broadcast.png" alt="Ilustración Broadcast" />
@@ -818,7 +848,6 @@
       </div>
     </section>
 
-    <!-- LOGOS -->
     <section class="logos" aria-label="Clientes">
       <div class="logos-track">
         <img src="images/logos-clientes/logo-cliente-broadcast1.png" alt="Cliente 1" />
@@ -855,7 +884,6 @@
       </div>
     </section>
 
-    <!-- QUIÉNES SOMOS -->
     <section class="section about">
       <div class="container about-grid">
         <div>
@@ -873,7 +901,6 @@
       </div>
     </section>
 
-    <!-- PORTFOLIO -->
     <section class="portfolio" id="portfolio" aria-label="Portfolio">
       <div class="project"><img src="images/portfolio/proyecto-broadcast1.jpg" alt="Proyecto Broadcast 1" /></div>
       <div class="project"><img src="images/portfolio/proyecto-broadcast2.jpg" alt="Proyecto Broadcast 2" /></div>
@@ -885,7 +912,6 @@
       <div class="project"><img src="images/portfolio/proyecto-broadcast8.jpg" alt="Proyecto Broadcast 8" /></div>
     </section>
 
-    <!-- SERVICIOS DESTACADOS -->
     <section class="section services-feature" id="servicios-destacados">
       <div class="container">
         <div class="section-head">
@@ -902,7 +928,6 @@
           <button class="service-tab" type="button" role="tab" aria-selected="false" data-service="packaging">Papelería y packaging</button>
         </div>
 
-        <!-- BRANDING -->
         <div class="service-panel active" data-panel="branding">
           <div class="service-card">
             <div class="service-image">
@@ -911,14 +936,8 @@
             <div class="service-content">
               <p class="service-category">Comunicación de marca</p>
               <h3 class="service-title">Branding e identidad visual</h3>
-
-              <p class="service-description">
-                Desarrollamos sistemas de identidad visual que permiten construir una comunicación coherente, reconocible y profesional.
-              </p>
-
-              <p class="service-extra">
-                El proceso incluye análisis del posicionamiento, definición conceptual y desarrollo visual.
-              </p>
+              <p class="service-description">Desarrollamos sistemas de identidad visual que permiten construir una comunicación coherente, reconocible y profesional.</p>
+              <p class="service-extra">El proceso incluye análisis del posicionamiento, definición conceptual y desarrollo visual.</p>
 
               <div class="service-includes">
                 <h4>Incluye:</h4>
@@ -937,7 +956,6 @@
           </div>
         </div>
 
-        <!-- PRESENTACIONES -->
         <div class="service-panel" data-panel="presentaciones">
           <div class="service-card">
             <div class="service-image">
@@ -946,14 +964,8 @@
             <div class="service-content">
               <p class="service-category">Comunicación corporativa</p>
               <h3 class="service-title">Presentaciones institucionales y brochures</h3>
-
-              <p class="service-description">
-                Diseñamos presentaciones y documentos corporativos orientados a comunicar información de forma clara, estructurada y profesional. Trabajamos especialmente en contextos donde la información debe ser evaluada, como reuniones comerciales, propuestas a clientes o procesos internos.
-              </p>
-
-              <p class="service-extra">
-                Dentro de esta categoría, desarrollamos brochures institucionales para empresas que necesitan presentarse en licitaciones o registrarse como proveedores en plataformas como Ariba o Avetta. Cada presentación se construye a partir del análisis y organización del contenido, asegurando el cumplimiento de los requisitos solicitados de cada sistema.
-              </p>
+              <p class="service-description">Diseñamos presentaciones y documentos corporativos orientados a comunicar información de forma clara, estructurada y profesional. Trabajamos especialmente en contextos donde la información debe ser evaluada, como reuniones comerciales, propuestas a clientes o procesos internos.</p>
+              <p class="service-extra">Dentro de esta categoría, desarrollamos brochures institucionales para empresas que necesitan presentarse en licitaciones o registrarse como proveedores en plataformas como Ariba o Avetta. Cada presentación se construye a partir del análisis y organización del contenido, asegurando el cumplimiento de los requisitos solicitados de cada sistema.</p>
 
               <div class="service-footer">
                 <a class="service-cta" href="#contacto">Solicitar servicio</a>
@@ -962,7 +974,6 @@
           </div>
         </div>
 
-        <!-- CONSULTORIA -->
         <div class="service-panel" data-panel="consultoria">
           <div class="service-card">
             <div class="service-image">
@@ -971,14 +982,8 @@
             <div class="service-content">
               <p class="service-category">Consultoría</p>
               <h3 class="service-title">Auditoría de diseño “¿Decora o Funciona?”</h3>
-
-              <p class="service-description">
-                Analizamos la comunicación visual de la empresa para identificar si el diseño está cumpliendo su función o si solo responde a una cuestión estética. Evaluamos la claridad del mensaje, la relación entre piezas y la forma en que se presenta la información.
-              </p>
-
-              <p class="service-extra">
-                A partir de este diagnóstico, proponemos mejoras concretas que permiten optimizar la comunicación y alinear el diseño con los objetivos del negocio.
-              </p>
+              <p class="service-description">Analizamos la comunicación visual de la empresa para identificar si el diseño está cumpliendo su función o si solo responde a una cuestión estética. Evaluamos la claridad del mensaje, la relación entre piezas y la forma en que se presenta la información.</p>
+              <p class="service-extra">A partir de este diagnóstico, proponemos mejoras concretas que permiten optimizar la comunicación y alinear el diseño con los objetivos del negocio.</p>
 
               <div class="service-includes">
                 <h4>Incluye:</h4>
@@ -998,7 +1003,6 @@
           </div>
         </div>
 
-        <!-- WEB -->
         <div class="service-panel" data-panel="web">
           <div class="service-card">
             <div class="service-image">
@@ -1007,18 +1011,9 @@
             <div class="service-content">
               <p class="service-category">Comunicación digital</p>
               <h3 class="service-title">Diseño web</h3>
-
-              <p class="service-description">
-                Diseñamos sitios web priorizando la estructura del contenido, la experiencia de usuario y la claridad en la navegación.
-              </p>
-
-              <p class="service-extra">
-                Cada proyecto se desarrolla en función de los objetivos del cliente, buscando que la información sea fácilmente accesible y comprensible.
-              </p>
-
-              <p class="service-extra">
-                Trabajamos en plataformas como Wix, Tienda Nube y WordPress, y también desarrollamos prototipos en Figma para equipos de programación, aplicando criterios de UX/UI que aseguran una correcta implementación y funcionamiento del sitio.
-              </p>
+              <p class="service-description">Diseñamos sitios web priorizando la estructura del contenido, la experiencia de usuario y la claridad en la navegación.</p>
+              <p class="service-extra">Cada proyecto se desarrolla en función de los objetivos del cliente, buscando que la información sea fácilmente accesible y comprensible.</p>
+              <p class="service-extra">Trabajamos en plataformas como Wix, Tienda Nube y WordPress, y también desarrollamos prototipos en Figma para equipos de programación, aplicando criterios de UX/UI que aseguran una correcta implementación y funcionamiento del sitio.</p>
 
               <div class="service-footer">
                 <a class="service-cta" href="#contacto">Solicitar servicio</a>
@@ -1027,7 +1022,6 @@
           </div>
         </div>
 
-        <!-- REDES -->
         <div class="service-panel" data-panel="redes">
           <div class="service-card">
             <div class="service-image">
@@ -1036,14 +1030,8 @@
             <div class="service-content">
               <p class="service-category">Comunicación digital</p>
               <h3 class="service-title">Diseño para redes sociales</h3>
-
-              <p class="service-description">
-                Creamos sistemas visuales para redes sociales que permiten mantener una comunicación coherente y sostenida en el tiempo.
-              </p>
-
-              <p class="service-extra">
-                No se trata solo de piezas aisladas, sino de construir una identidad dentro del entorno digital.
-              </p>
+              <p class="service-description">Creamos sistemas visuales para redes sociales que permiten mantener una comunicación coherente y sostenida en el tiempo.</p>
+              <p class="service-extra">No se trata solo de piezas aisladas, sino de construir una identidad dentro del entorno digital.</p>
 
               <div class="service-includes">
                 <h4>Incluye:</h4>
@@ -1063,7 +1051,6 @@
           </div>
         </div>
 
-        <!-- PACKAGING -->
         <div class="service-panel" data-panel="packaging">
           <div class="service-card">
             <div class="service-image">
@@ -1072,18 +1059,9 @@
             <div class="service-content">
               <p class="service-category">Comunicación de marca</p>
               <h3 class="service-title">Papelería y packaging</h3>
-
-              <p class="service-description">
-                Diseñamos piezas físicas que extienden la identidad de tu marca más allá de lo digital, generando una experiencia coherente en cada punto de contacto.
-              </p>
-
-              <p class="service-extra">
-                El objetivo es que cada elemento —desde una etiqueta hasta un packaging completo— comunique con claridad, refuerce el posicionamiento y aporte valor percibido al producto.
-              </p>
-
-              <p class="service-extra">
-                Trabajamos desde la conceptualización hasta el diseño final, contemplando materiales, formatos y sistemas de impresión para asegurar un resultado funcional y profesional.
-              </p>
+              <p class="service-description">Diseñamos piezas físicas que extienden la identidad de tu marca más allá de lo digital, generando una experiencia coherente en cada punto de contacto.</p>
+              <p class="service-extra">El objetivo es que cada elemento, desde una etiqueta hasta un packaging completo, comunique con claridad, refuerce el posicionamiento y aporte valor percibido al producto.</p>
+              <p class="service-extra">Trabajamos desde la conceptualización hasta el diseño final, contemplando materiales, formatos y sistemas de impresión para asegurar un resultado funcional y profesional.</p>
 
               <div class="service-includes">
                 <h4>Incluye:</h4>
@@ -1105,7 +1083,6 @@
       </div>
     </section>
 
-    <!-- CONTACTO -->
     <section id="contacto" class="contact">
       <div class="container">
         <h2>Hablemos de tu marca</h2>
@@ -1154,16 +1131,16 @@
     const tabs = document.querySelectorAll(".service-tab");
     const panels = document.querySelectorAll(".service-panel");
 
-    tabs.forEach(tab => {
+    tabs.forEach((tab) => {
       tab.addEventListener("click", () => {
         const target = tab.dataset.service;
 
-        tabs.forEach(item => {
+        tabs.forEach((item) => {
           item.classList.remove("active");
           item.setAttribute("aria-selected", "false");
         });
 
-        panels.forEach(panel => {
+        panels.forEach((panel) => {
           panel.classList.remove("active");
         });
 
@@ -1179,3 +1156,4 @@
   </script>
 </body>
 </html>
+
