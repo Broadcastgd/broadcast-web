@@ -20,10 +20,10 @@
       --line: rgba(54, 57, 48, 0.18);
       --line-light: rgba(255, 255, 255, 0.2);
       --shadow: 0 10px 28px rgba(54, 57, 48, 0.1);
-      --radius-xl: 28px;
-      --radius-lg: 24px;
-      --radius-md: 18px;
-      --radius-sm: 14px;
+      --radius-xl: 16px;
+      --radius-lg: 16px;
+      --radius-md: 16px;
+      --radius-sm: 16px;
       --container: 1280px;
       --header-height: 88px;
     }
@@ -93,7 +93,7 @@
       gap: 10px;
       padding: 12px 22px;
       border: 3px solid var(--olive);
-      border-radius: 18px;
+      border-radius: 16px;
       background: transparent;
       color: var(--olive);
       font-size: 1rem;
@@ -202,9 +202,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(90deg, rgba(109, 112, 99, 0.5) 0%, rgba(109, 112, 99, 0.18) 36%, rgba(109, 112, 99, 0.1) 100%),
-        linear-gradient(180deg, rgba(54, 57, 48, 0.12) 0%, rgba(54, 57, 48, 0.3) 100%);
+      background: rgba(89, 91, 81, 0.4);
     }
 
     .hero-media video {
@@ -260,6 +258,7 @@
       max-width: 430px;
       width: 100%;
       margin: 0 auto;
+      animation: floatIllustration 5s ease-in-out infinite;
     }
 
     .cards-grid {
@@ -276,7 +275,7 @@
       justify-content: center;
       text-align: center;
       padding: 18px;
-      border-radius: var(--radius-md);
+      border-radius: 16px;
       border: 1px solid var(--line);
       background: rgba(255, 255, 255, 0.4);
       backdrop-filter: blur(8px);
@@ -358,7 +357,7 @@
 
     .stat {
       padding: 18px 20px;
-      border-radius: var(--radius-md);
+      border-radius: 16px;
       border: 1px solid var(--line-light);
       background: rgba(255, 255, 255, 0.06);
       backdrop-filter: blur(6px);
@@ -419,9 +418,14 @@
 
     .services-feature .container {
       max-width: 980px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .services-feature .section-head {
+      width: 100%;
+      max-width: 860px;
       margin-bottom: 22px;
     }
 
@@ -438,45 +442,44 @@
     }
 
     .services-tabs {
+      width: 100%;
+      max-width: 860px;
       display: flex;
       flex-wrap: wrap;
-      gap: 0;
-      margin-bottom: -8px;
-      align-items: flex-end;
+      gap: 8px;
+      margin-bottom: 10px;
+      align-items: stretch;
     }
 
     .service-tab {
       border: none;
-      background: transparent;
-      color: rgba(54, 57, 48, 0.8);
+      background: rgba(247, 239, 238, 0.08);
+      color: rgba(54, 57, 48, 0.9);
       padding: 11px 14px;
       font-size: 0.8rem;
       font-weight: 600;
       line-height: 1.15;
       cursor: pointer;
-      border-right: 1px solid rgba(247, 239, 238, 0.45);
+      border-radius: 16px;
       transition: 0.25s ease;
-    }
-
-    .service-tab:last-child {
-      border-right: none;
+      white-space: nowrap;
     }
 
     .service-tab.active {
       background: #f7efee;
       color: var(--text);
-      border-radius: 18px 18px 0 0;
       box-shadow: 0 4px 14px rgba(54, 57, 48, 0.08);
     }
 
     .service-panel {
       display: none;
+      width: 100%;
+      max-width: 860px;
       background: #f7efee;
       color: var(--text);
-      border-radius: 0 24px 24px 24px;
+      border-radius: 16px;
       padding: 10px;
       box-shadow: none;
-      max-width: 860px;
     }
 
     .service-panel.active {
@@ -493,7 +496,7 @@
     .service-image {
       height: 100%;
       min-height: 280px;
-      border-radius: 18px;
+      border-radius: 16px;
       overflow: hidden;
     }
 
@@ -504,7 +507,7 @@
     }
 
     .service-content {
-      padding: 14px 8px 10px 0;
+      padding: 28px 30px 24px 18px;
       display: flex;
       flex-direction: column;
     }
@@ -570,12 +573,18 @@
       border-color: #dbe3cc;
       color: var(--olive);
       background: #edf2e4;
+      border-radius: 16px;
     }
 
     .service-cta:hover {
       background: var(--olive);
       color: var(--white);
       border-color: var(--olive);
+    }
+
+    .reviews {
+      background: #f6efed;
+      padding: 72px 0 28px;
     }
 
     .contact {
@@ -661,7 +670,7 @@
       }
 
       .service-panel {
-        max-width: none;
+        max-width: 860px;
       }
 
       .service-image {
@@ -700,8 +709,6 @@
 
       .services-illustration {
         max-width: 320px;
-        margin: 0 auto;
-        animation: floatIllustration 5s ease-in-out infinite;
       }
 
       .about p {
@@ -711,6 +718,11 @@
       .service-tab {
         font-size: 0.86rem;
         padding: 10px 12px;
+        white-space: normal;
+      }
+
+      .service-content {
+        padding: 24px 22px 20px 22px;
       }
     }
 
@@ -766,31 +778,30 @@
         gap: 8px;
       }
 
-      .service-tab {
-        border-right: none;
-        border-radius: 14px;
-        background: rgba(247,239,238,0.16);
-        color: var(--text);
-      }
-
-      .service-tab.active {
-        border-radius: 14px;
-      }
-
       .service-panel {
-        border-radius: 20px;
+        border-radius: 16px;
         padding: 12px;
       }
 
       .service-title {
         font-size: 2rem;
       }
+
+      .service-content {
+        padding: 20px 18px 18px 18px;
+      }
     }
 
     @keyframes floatIllustration {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-      100% { transform: translateY(0px); }
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
     }
   </style>
 </head>
@@ -812,22 +823,23 @@
   </header>
 
   <main>
-   <section class="hero" id="inicio">
-  <div class="hero-media">
-    <video autoplay muted loop playsinline webkit-playsinline preload="auto">
-      <source src="./video/video-broadcast-home.mp4" type="video/mp4" />
-      Tu navegador no soporta videos HTML5.
-    </video>
-  </div>
+    <section class="hero" id="inicio">
+      <div class="hero-media">
+        <video autoplay muted loop playsinline webkit-playsinline preload="auto">
+          <source src="./video/video-broadcast-home.mp4" type="video/mp4" />
+          Tu navegador no soporta videos HTML5.
+        </video>
+      </div>
 
-  <div class="hero-inner">
-    <div class="hero-content">
-      <h1>Estructura, claridad y propósito.</h1>
-      <p>Ordenamos la comunicación visual de tu empresa.</p>
-      <a class="btn btn--light btn-arrow" href="#contacto">Contactanos</a>
-    </div>
-  </div>
-</section>
+      <div class="hero-inner">
+        <div class="hero-content">
+          <h1>Estructura, claridad y propósito.</h1>
+          <p>Ordenamos la comunicación visual de tu empresa.</p>
+          <a class="btn btn--light btn-arrow" href="#contacto">Contactanos</a>
+        </div>
+      </div>
+    </section>
+
     <section class="section services-wrap">
       <div class="container services-grid">
         <img class="services-illustration" src="images/ilustracion-broadcast.png" alt="Ilustración Broadcast" />
@@ -936,8 +948,14 @@
             <div class="service-content">
               <p class="service-category">Comunicación de marca</p>
               <h3 class="service-title">Branding e identidad visual</h3>
-              <p class="service-description">Desarrollamos sistemas de identidad visual que permiten construir una comunicación coherente, reconocible y profesional.</p>
-              <p class="service-extra">El proceso incluye análisis del posicionamiento, definición conceptual y desarrollo visual.</p>
+
+              <p class="service-description">
+                Desarrollamos sistemas de identidad visual que permiten construir una comunicación coherente, reconocible y profesional.
+              </p>
+
+              <p class="service-extra">
+                El proceso incluye análisis del posicionamiento, definición conceptual y desarrollo visual.
+              </p>
 
               <div class="service-includes">
                 <h4>Incluye:</h4>
@@ -964,8 +982,14 @@
             <div class="service-content">
               <p class="service-category">Comunicación corporativa</p>
               <h3 class="service-title">Presentaciones institucionales y brochures</h3>
-              <p class="service-description">Diseñamos presentaciones y documentos corporativos orientados a comunicar información de forma clara, estructurada y profesional. Trabajamos especialmente en contextos donde la información debe ser evaluada, como reuniones comerciales, propuestas a clientes o procesos internos.</p>
-              <p class="service-extra">Dentro de esta categoría, desarrollamos brochures institucionales para empresas que necesitan presentarse en licitaciones o registrarse como proveedores en plataformas como Ariba o Avetta. Cada presentación se construye a partir del análisis y organización del contenido, asegurando el cumplimiento de los requisitos solicitados de cada sistema.</p>
+
+              <p class="service-description">
+                Diseñamos presentaciones y documentos corporativos orientados a comunicar información de forma clara, estructurada y profesional. Trabajamos especialmente en contextos donde la información debe ser evaluada, como reuniones comerciales, propuestas a clientes o procesos internos.
+              </p>
+
+              <p class="service-extra">
+                Dentro de esta categoría, desarrollamos brochures institucionales para empresas que necesitan presentarse en licitaciones o registrarse como proveedores en plataformas como Ariba o Avetta. Cada presentación se construye a partir del análisis y organización del contenido, asegurando el cumplimiento de los requisitos solicitados de cada sistema.
+              </p>
 
               <div class="service-footer">
                 <a class="service-cta" href="#contacto">Solicitar servicio</a>
@@ -982,8 +1006,14 @@
             <div class="service-content">
               <p class="service-category">Consultoría</p>
               <h3 class="service-title">Auditoría de diseño “¿Decora o Funciona?”</h3>
-              <p class="service-description">Analizamos la comunicación visual de la empresa para identificar si el diseño está cumpliendo su función o si solo responde a una cuestión estética. Evaluamos la claridad del mensaje, la relación entre piezas y la forma en que se presenta la información.</p>
-              <p class="service-extra">A partir de este diagnóstico, proponemos mejoras concretas que permiten optimizar la comunicación y alinear el diseño con los objetivos del negocio.</p>
+
+              <p class="service-description">
+                Analizamos la comunicación visual de la empresa para identificar si el diseño está cumpliendo su función o si solo responde a una cuestión estética. Evaluamos la claridad del mensaje, la relación entre piezas y la forma en que se presenta la información.
+              </p>
+
+              <p class="service-extra">
+                A partir de este diagnóstico, proponemos mejoras concretas que permiten optimizar la comunicación y alinear el diseño con los objetivos del negocio.
+              </p>
 
               <div class="service-includes">
                 <h4>Incluye:</h4>
@@ -1011,9 +1041,18 @@
             <div class="service-content">
               <p class="service-category">Comunicación digital</p>
               <h3 class="service-title">Diseño web</h3>
-              <p class="service-description">Diseñamos sitios web priorizando la estructura del contenido, la experiencia de usuario y la claridad en la navegación.</p>
-              <p class="service-extra">Cada proyecto se desarrolla en función de los objetivos del cliente, buscando que la información sea fácilmente accesible y comprensible.</p>
-              <p class="service-extra">Trabajamos en plataformas como Wix, Tienda Nube y WordPress, y también desarrollamos prototipos en Figma para equipos de programación, aplicando criterios de UX/UI que aseguran una correcta implementación y funcionamiento del sitio.</p>
+
+              <p class="service-description">
+                Diseñamos sitios web priorizando la estructura del contenido, la experiencia de usuario y la claridad en la navegación.
+              </p>
+
+              <p class="service-extra">
+                Cada proyecto se desarrolla en función de los objetivos del cliente, buscando que la información sea fácilmente accesible y comprensible.
+              </p>
+
+              <p class="service-extra">
+                Trabajamos en plataformas como Wix, Tienda Nube y WordPress, y también desarrollamos prototipos en Figma para equipos de programación, aplicando criterios de UX/UI que aseguran una correcta implementación y funcionamiento del sitio.
+              </p>
 
               <div class="service-footer">
                 <a class="service-cta" href="#contacto">Solicitar servicio</a>
@@ -1030,8 +1069,14 @@
             <div class="service-content">
               <p class="service-category">Comunicación digital</p>
               <h3 class="service-title">Diseño para redes sociales</h3>
-              <p class="service-description">Creamos sistemas visuales para redes sociales que permiten mantener una comunicación coherente y sostenida en el tiempo.</p>
-              <p class="service-extra">No se trata solo de piezas aisladas, sino de construir una identidad dentro del entorno digital.</p>
+
+              <p class="service-description">
+                Creamos sistemas visuales para redes sociales que permiten mantener una comunicación coherente y sostenida en el tiempo.
+              </p>
+
+              <p class="service-extra">
+                No se trata solo de piezas aisladas, sino de construir una identidad dentro del entorno digital.
+              </p>
 
               <div class="service-includes">
                 <h4>Incluye:</h4>
@@ -1059,9 +1104,18 @@
             <div class="service-content">
               <p class="service-category">Comunicación de marca</p>
               <h3 class="service-title">Papelería y packaging</h3>
-              <p class="service-description">Diseñamos piezas físicas que extienden la identidad de tu marca más allá de lo digital, generando una experiencia coherente en cada punto de contacto.</p>
-              <p class="service-extra">El objetivo es que cada elemento, desde una etiqueta hasta un packaging completo, comunique con claridad, refuerce el posicionamiento y aporte valor percibido al producto.</p>
-              <p class="service-extra">Trabajamos desde la conceptualización hasta el diseño final, contemplando materiales, formatos y sistemas de impresión para asegurar un resultado funcional y profesional.</p>
+
+              <p class="service-description">
+                Diseñamos piezas físicas que extienden la identidad de tu marca más allá de lo digital, generando una experiencia coherente en cada punto de contacto.
+              </p>
+
+              <p class="service-extra">
+                El objetivo es que cada elemento, desde una etiqueta hasta un packaging completo, comunique con claridad, refuerce el posicionamiento y aporte valor percibido al producto.
+              </p>
+
+              <p class="service-extra">
+                Trabajamos desde la conceptualización hasta el diseño final, contemplando materiales, formatos y sistemas de impresión para asegurar un resultado funcional y profesional.
+              </p>
 
               <div class="service-includes">
                 <h4>Incluye:</h4>
@@ -1092,9 +1146,16 @@
           <a href="https://wa.me/5491157219634" target="_blank" rel="noopener noreferrer">WhatsApp</a>
           <a href="mailto:hi@broadcastgd.com">hi@broadcastgd.com</a>
           <a href="https://www.instagram.com/broadcast.gd/" target="_blank" rel="noopener noreferrer">Instagram</a>
-          <a href="linkedin.com/company/broadcastgd" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href="https://broadcastgd.com" target="_blank" rel="noopener noreferrer">Sitio actual</a>
+          <a href="https://linkedin.com/company/broadcastgd" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
+      </div>
+    </section>
+
+    <section class="reviews">
+      <div class="container">
+        <!-- Elfsight Google Reviews | Untitled Google Reviews -->
+        <script src="https://elfsightcdn.com/platform.js" async></script>
+        <div class="elfsight-app-012e40b1-ac86-4fe3-9c7b-0bb323322f47" data-elfsight-app-lazy></div>
       </div>
     </section>
   </main>
@@ -1108,7 +1169,7 @@
 
       <div class="footer-socials">
         <a href="https://www.instagram.com/broadcast.gd/" target="_blank" rel="noopener noreferrer">Instagram</a>
-        <a href="linkedin.com/company/broadcastgd" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://linkedin.com/company/broadcastgd" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="mailto:hi@broadcastgd.com">hi@broadcastgd.com</a>
       </div>
     </div>
