@@ -16,6 +16,7 @@
       --text: #363930;
       --olive: #6d7063;
       --olive-soft: #a9ad9f;
+      --olive-overlay: rgba(89, 91, 81, 0.4);
       --white: #f7efee;
       --line: rgba(54, 57, 48, 0.18);
       --line-light: rgba(255, 255, 255, 0.2);
@@ -202,7 +203,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(89, 91, 81, 0.4);
+      background: var(--olive-overlay);
     }
 
     .hero-media video {
@@ -350,26 +351,17 @@
       margin-bottom: 28px;
     }
 
-    .stats {
-      display: grid;
-      gap: 16px;
+    .about-graphic {
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
 
-    .stat {
-      padding: 18px 20px;
-      border-radius: 16px;
-      border: 1px solid var(--line-light);
-      background: rgba(255, 255, 255, 0.06);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-    }
-
-    .stat strong {
-      display: inline-block;
-      font-size: 2rem;
-      line-height: 1;
-      margin-right: 8px;
-      letter-spacing: -0.03em;
+    .about-graphic img {
+      width: 100%;
+      max-width: 620px;
+      height: auto;
+      animation: floatIllustration 5s ease-in-out infinite;
     }
 
     .portfolio {
@@ -383,6 +375,9 @@
       overflow: hidden;
       min-height: 310px;
       background: #d5c5c1;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
     }
 
     .project img {
@@ -582,11 +577,6 @@
       border-color: var(--olive);
     }
 
-    .reviews {
-      background: #f6efed;
-      padding: 72px 0 28px;
-    }
-
     .contact {
       background: #f6efed;
       text-align: center;
@@ -611,6 +601,11 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 14px;
+    }
+
+    .reviews {
+      background: #f6efed;
+      padding: 0 0 40px;
     }
 
     .footer {
@@ -656,6 +651,102 @@
       text-decoration: underline;
     }
 
+    .portfolio-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      display: none;
+    }
+
+    .portfolio-modal.open {
+      display: block;
+    }
+
+    .portfolio-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(89, 91, 81, 0.72);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+    }
+
+    .portfolio-modal-dialog {
+      position: relative;
+      z-index: 1;
+      width: min(520px, calc(100% - 24px));
+      margin: 28px auto;
+      background: #f7efee;
+      border-radius: 20px;
+      padding: 14px 14px 40px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+    }
+
+    .portfolio-viewer {
+      border-radius: 16px;
+      overflow: hidden;
+      background: #ead9d7;
+    }
+
+    .portfolio-viewer img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+
+    .portfolio-close {
+      position: absolute;
+      top: 6px;
+      left: 10px;
+      border: 0;
+      background: transparent;
+      color: #a3ac95;
+      font-size: 2rem;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .portfolio-dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .portfolio-dots button {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      border: 0;
+      background: rgba(109, 112, 99, 0.22);
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+
+    .portfolio-dots button.active {
+      background: #8b967b;
+    }
+
+    .portfolio-hit {
+      position: absolute;
+      top: 0;
+      bottom: 40px;
+      width: 26%;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .portfolio-hit-prev {
+      left: 0;
+    }
+
+    .portfolio-hit-next {
+      right: 0;
+    }
+
     @media (max-width: 1180px) {
       .cards-grid {
         grid-template-columns: repeat(2, minmax(150px, 1fr));
@@ -667,10 +758,6 @@
 
       .service-card {
         grid-template-columns: 1fr;
-      }
-
-      .service-panel {
-        max-width: 860px;
       }
 
       .service-image {
@@ -715,6 +802,10 @@
         max-width: 100%;
       }
 
+      .about-graphic img {
+        max-width: 480px;
+      }
+
       .service-tab {
         font-size: 0.86rem;
         padding: 10px 12px;
@@ -750,12 +841,18 @@
         padding-bottom: 10px;
       }
 
+      .hero-content {
+        max-width: 100%;
+      }
+
       .hero h1 {
-        max-width: 390px;
+        max-width: 320px;
+        font-size: clamp(2.4rem, 11vw, 4rem);
       }
 
       .hero p {
         font-size: 1rem;
+        max-width: 300px;
       }
 
       .cards-grid {
@@ -789,6 +886,45 @@
 
       .service-content {
         padding: 20px 18px 18px 18px;
+      }
+
+      .contact {
+        padding: 72px 0;
+      }
+
+      .contact h2 {
+        font-size: 2.2rem;
+      }
+
+      .contact p {
+        font-size: 1rem;
+      }
+
+      .portfolio-modal-dialog {
+        width: calc(100% - 16px);
+        margin: 18px auto;
+        padding: 10px 10px 34px;
+        border-radius: 18px;
+      }
+
+      .portfolio-viewer {
+        border-radius: 14px;
+      }
+
+      .portfolio-close {
+        top: 2px;
+        left: 8px;
+        font-size: 1.8rem;
+      }
+
+      .portfolio-dots {
+        gap: 7px;
+        margin-top: 10px;
+      }
+
+      .portfolio-dots button {
+        width: 9px;
+        height: 9px;
       }
     }
 
@@ -904,24 +1040,37 @@
           <a class="btn btn--light btn-arrow" href="#portfolio">Conocé nuestros trabajos</a>
         </div>
 
-        <div class="stats">
-          <div class="stat"><strong>+50</strong> identidades visuales desarrolladas</div>
-          <div class="stat"><strong>100%</strong> cumplimiento en tiempos</div>
-          <div class="stat"><strong>+10</strong> rubros abarcados</div>
-          <div class="stat"><strong>Desde 2019</strong> acompañando marcas</div>
+        <div class="about-graphic">
+          <img src="images/broadcast-en-numeros.svg" alt="Broadcast en números" />
         </div>
       </div>
     </section>
 
     <section class="portfolio" id="portfolio" aria-label="Portfolio">
-      <div class="project"><img src="images/portfolio/proyecto-broadcast1.jpg" alt="Proyecto Broadcast 1" /></div>
-      <div class="project"><img src="images/portfolio/proyecto-broadcast2.jpg" alt="Proyecto Broadcast 2" /></div>
-      <div class="project"><img src="images/portfolio/proyecto-broadcast3.jpg" alt="Proyecto Broadcast 3" /></div>
-      <div class="project"><img src="images/portfolio/proyecto-broadcast4.jpg" alt="Proyecto Broadcast 4" /></div>
-      <div class="project"><img src="images/portfolio/proyecto-broadcast5.jpg" alt="Proyecto Broadcast 5" /></div>
-      <div class="project"><img src="images/portfolio/proyecto-broadcast6.jpg" alt="Proyecto Broadcast 6" /></div>
-      <div class="project"><img src="images/portfolio/proyecto-broadcast7.jpg" alt="Proyecto Broadcast 7" /></div>
-      <div class="project"><img src="images/portfolio/proyecto-broadcast8.jpg" alt="Proyecto Broadcast 8" /></div>
+      <button class="project" type="button" data-project="1" aria-label="Abrir proyecto 1">
+        <img src="images/portfolio/proyecto-broadcast-1-1.jpg" alt="Proyecto Broadcast 1" />
+      </button>
+      <button class="project" type="button" data-project="2" aria-label="Abrir proyecto 2">
+        <img src="images/portfolio/proyecto-broadcast-2-1.jpg" alt="Proyecto Broadcast 2" />
+      </button>
+      <button class="project" type="button" data-project="3" aria-label="Abrir proyecto 3">
+        <img src="images/portfolio/proyecto-broadcast-3-1.jpg" alt="Proyecto Broadcast 3" />
+      </button>
+      <button class="project" type="button" data-project="4" aria-label="Abrir proyecto 4">
+        <img src="images/portfolio/proyecto-broadcast-4-1.jpg" alt="Proyecto Broadcast 4" />
+      </button>
+      <button class="project" type="button" data-project="5" aria-label="Abrir proyecto 5">
+        <img src="images/portfolio/proyecto-broadcast-5-1.jpg" alt="Proyecto Broadcast 5" />
+      </button>
+      <button class="project" type="button" data-project="6" aria-label="Abrir proyecto 6">
+        <img src="images/portfolio/proyecto-broadcast-6-1.jpg" alt="Proyecto Broadcast 6" />
+      </button>
+      <button class="project" type="button" data-project="7" aria-label="Abrir proyecto 7">
+        <img src="images/portfolio/proyecto-broadcast-7-1.jpg" alt="Proyecto Broadcast 7" />
+      </button>
+      <button class="project" type="button" data-project="8" aria-label="Abrir proyecto 8">
+        <img src="images/portfolio/proyecto-broadcast-8-1.jpg" alt="Proyecto Broadcast 8" />
+      </button>
     </section>
 
     <section class="section services-feature" id="servicios-destacados">
@@ -948,14 +1097,8 @@
             <div class="service-content">
               <p class="service-category">Comunicación de marca</p>
               <h3 class="service-title">Branding e identidad visual</h3>
-
-              <p class="service-description">
-                Desarrollamos sistemas de identidad visual que permiten construir una comunicación coherente, reconocible y profesional.
-              </p>
-
-              <p class="service-extra">
-                El proceso incluye análisis del posicionamiento, definición conceptual y desarrollo visual.
-              </p>
+              <p class="service-description">Desarrollamos sistemas de identidad visual que permiten construir una comunicación coherente, reconocible y profesional.</p>
+              <p class="service-extra">El proceso incluye análisis del posicionamiento, definición conceptual y desarrollo visual.</p>
 
               <div class="service-includes">
                 <h4>Incluye:</h4>
@@ -982,14 +1125,8 @@
             <div class="service-content">
               <p class="service-category">Comunicación corporativa</p>
               <h3 class="service-title">Presentaciones institucionales y brochures</h3>
-
-              <p class="service-description">
-                Diseñamos presentaciones y documentos corporativos orientados a comunicar información de forma clara, estructurada y profesional. Trabajamos especialmente en contextos donde la información debe ser evaluada, como reuniones comerciales, propuestas a clientes o procesos internos.
-              </p>
-
-              <p class="service-extra">
-                Dentro de esta categoría, desarrollamos brochures institucionales para empresas que necesitan presentarse en licitaciones o registrarse como proveedores en plataformas como Ariba o Avetta. Cada presentación se construye a partir del análisis y organización del contenido, asegurando el cumplimiento de los requisitos solicitados de cada sistema.
-              </p>
+              <p class="service-description">Diseñamos presentaciones y documentos corporativos orientados a comunicar información de forma clara, estructurada y profesional. Trabajamos especialmente en contextos donde la información debe ser evaluada, como reuniones comerciales, propuestas a clientes o procesos internos.</p>
+              <p class="service-extra">Dentro de esta categoría, desarrollamos brochures institucionales para empresas que necesitan presentarse en licitaciones o registrarse como proveedores en plataformas como Ariba o Avetta. Cada presentación se construye a partir del análisis y organización del contenido, asegurando el cumplimiento de los requisitos solicitados de cada sistema.</p>
 
               <div class="service-footer">
                 <a class="service-cta" href="#contacto">Solicitar servicio</a>
@@ -1006,14 +1143,8 @@
             <div class="service-content">
               <p class="service-category">Consultoría</p>
               <h3 class="service-title">Auditoría de diseño “¿Decora o Funciona?”</h3>
-
-              <p class="service-description">
-                Analizamos la comunicación visual de la empresa para identificar si el diseño está cumpliendo su función o si solo responde a una cuestión estética. Evaluamos la claridad del mensaje, la relación entre piezas y la forma en que se presenta la información.
-              </p>
-
-              <p class="service-extra">
-                A partir de este diagnóstico, proponemos mejoras concretas que permiten optimizar la comunicación y alinear el diseño con los objetivos del negocio.
-              </p>
+              <p class="service-description">Analizamos la comunicación visual de la empresa para identificar si el diseño está cumpliendo su función o si solo responde a una cuestión estética. Evaluamos la claridad del mensaje, la relación entre piezas y la forma en que se presenta la información.</p>
+              <p class="service-extra">A partir de este diagnóstico, proponemos mejoras concretas que permiten optimizar la comunicación y alinear el diseño con los objetivos del negocio.</p>
 
               <div class="service-includes">
                 <h4>Incluye:</h4>
@@ -1041,18 +1172,9 @@
             <div class="service-content">
               <p class="service-category">Comunicación digital</p>
               <h3 class="service-title">Diseño web</h3>
-
-              <p class="service-description">
-                Diseñamos sitios web priorizando la estructura del contenido, la experiencia de usuario y la claridad en la navegación.
-              </p>
-
-              <p class="service-extra">
-                Cada proyecto se desarrolla en función de los objetivos del cliente, buscando que la información sea fácilmente accesible y comprensible.
-              </p>
-
-              <p class="service-extra">
-                Trabajamos en plataformas como Wix, Tienda Nube y WordPress, y también desarrollamos prototipos en Figma para equipos de programación, aplicando criterios de UX/UI que aseguran una correcta implementación y funcionamiento del sitio.
-              </p>
+              <p class="service-description">Diseñamos sitios web priorizando la estructura del contenido, la experiencia de usuario y la claridad en la navegación.</p>
+              <p class="service-extra">Cada proyecto se desarrolla en función de los objetivos del cliente, buscando que la información sea fácilmente accesible y comprensible.</p>
+              <p class="service-extra">Trabajamos en plataformas como Wix, Tienda Nube y WordPress, y también desarrollamos prototipos en Figma para equipos de programación, aplicando criterios de UX/UI que aseguran una correcta implementación y funcionamiento del sitio.</p>
 
               <div class="service-footer">
                 <a class="service-cta" href="#contacto">Solicitar servicio</a>
@@ -1069,14 +1191,8 @@
             <div class="service-content">
               <p class="service-category">Comunicación digital</p>
               <h3 class="service-title">Diseño para redes sociales</h3>
-
-              <p class="service-description">
-                Creamos sistemas visuales para redes sociales que permiten mantener una comunicación coherente y sostenida en el tiempo.
-              </p>
-
-              <p class="service-extra">
-                No se trata solo de piezas aisladas, sino de construir una identidad dentro del entorno digital.
-              </p>
+              <p class="service-description">Creamos sistemas visuales para redes sociales que permiten mantener una comunicación coherente y sostenida en el tiempo.</p>
+              <p class="service-extra">No se trata solo de piezas aisladas, sino de construir una identidad dentro del entorno digital.</p>
 
               <div class="service-includes">
                 <h4>Incluye:</h4>
@@ -1104,18 +1220,9 @@
             <div class="service-content">
               <p class="service-category">Comunicación de marca</p>
               <h3 class="service-title">Papelería y packaging</h3>
-
-              <p class="service-description">
-                Diseñamos piezas físicas que extienden la identidad de tu marca más allá de lo digital, generando una experiencia coherente en cada punto de contacto.
-              </p>
-
-              <p class="service-extra">
-                El objetivo es que cada elemento, desde una etiqueta hasta un packaging completo, comunique con claridad, refuerce el posicionamiento y aporte valor percibido al producto.
-              </p>
-
-              <p class="service-extra">
-                Trabajamos desde la conceptualización hasta el diseño final, contemplando materiales, formatos y sistemas de impresión para asegurar un resultado funcional y profesional.
-              </p>
+              <p class="service-description">Diseñamos piezas físicas que extienden la identidad de tu marca más allá de lo digital, generando una experiencia coherente en cada punto de contacto.</p>
+              <p class="service-extra">El objetivo es que cada elemento, desde una etiqueta hasta un packaging completo, comunique con claridad, refuerce el posicionamiento y aporte valor percibido al producto.</p>
+              <p class="service-extra">Trabajamos desde la conceptualización hasta el diseño final, contemplando materiales, formatos y sistemas de impresión para asegurar un resultado funcional y profesional.</p>
 
               <div class="service-includes">
                 <h4>Incluye:</h4>
@@ -1175,6 +1282,23 @@
     </div>
   </footer>
 
+  <div class="portfolio-modal" id="portfolioModal" aria-hidden="true">
+    <div class="portfolio-modal-backdrop" data-close="true"></div>
+
+    <div class="portfolio-modal-dialog" role="dialog" aria-modal="true" aria-label="Galeria de proyecto">
+      <button class="portfolio-close" type="button" id="portfolioClose" aria-label="Cerrar">×</button>
+
+      <div class="portfolio-viewer">
+        <img id="portfolioImage" src="" alt="Proyecto ampliado" />
+      </div>
+
+      <div class="portfolio-dots" id="portfolioDots"></div>
+
+      <button class="portfolio-hit portfolio-hit-prev" type="button" id="portfolioPrev" aria-label="Imagen anterior"></button>
+      <button class="portfolio-hit portfolio-hit-next" type="button" id="portfolioNext" aria-label="Siguiente imagen"></button>
+    </div>
+  </div>
+
   <script>
     const header = document.getElementById("siteHeader");
 
@@ -1214,7 +1338,186 @@
         }
       });
     });
+
+    const projectImages = {
+      1: [
+        "images/portfolio/proyecto-broadcast-1-1.jpg",
+        "images/portfolio/proyecto-broadcast-1-2.jpg",
+        "images/portfolio/proyecto-broadcast-1-3.jpg",
+        "images/portfolio/proyecto-broadcast-1-4.jpg",
+        "images/portfolio/proyecto-broadcast-1-5.jpg",
+        "images/portfolio/proyecto-broadcast-1-6.jpg",
+        "images/portfolio/proyecto-broadcast-1-7.jpg"
+      ],
+      2: [
+        "images/portfolio/proyecto-broadcast-2-1.jpg",
+        "images/portfolio/proyecto-broadcast-2-2.png",
+        "images/portfolio/proyecto-broadcast-2-3.png",
+        "images/portfolio/proyecto-broadcast-2-4.jpg",
+        "images/portfolio/proyecto-broadcast-2-5.jpg",
+        "images/portfolio/proyecto-broadcast-2-6.jpg",
+        "images/portfolio/proyecto-broadcast-2-7.jpg",
+        "images/portfolio/proyecto-broadcast-2-8.jpg"
+      ],
+      3: [
+        "images/portfolio/proyecto-broadcast-3-1.jpg",
+        "images/portfolio/proyecto-broadcast-3-2.jpg",
+        "images/portfolio/proyecto-broadcast-3-3.jpg",
+        "images/portfolio/proyecto-broadcast-3-4.jpg",
+        "images/portfolio/proyecto-broadcast-3-5.jpg",
+        "images/portfolio/proyecto-broadcast-3-6.jpg",
+        "images/portfolio/proyecto-broadcast-3-7.jpg",
+        "images/portfolio/proyecto-broadcast-3-8.jpg"
+      ],
+      4: [
+        "images/portfolio/proyecto-broadcast-4-1.jpg",
+        "images/portfolio/proyecto-broadcast-4-2.png",
+        "images/portfolio/proyecto-broadcast-4-3.png",
+        "images/portfolio/proyecto-broadcast-4-4.png"
+      ],
+      5: [
+        "images/portfolio/proyecto-broadcast-5-1.jpg",
+        "images/portfolio/proyecto-broadcast-5-2.jpg",
+        "images/portfolio/proyecto-broadcast-5-3.jpg",
+        "images/portfolio/proyecto-broadcast-5-4.jpg",
+        "images/portfolio/proyecto-broadcast-5-5.jpg",
+        "images/portfolio/proyecto-broadcast-5-6.jpg",
+        "images/portfolio/proyecto-broadcast-5-7.jpg"
+      ],
+      6: [
+        "images/portfolio/proyecto-broadcast-6-1.jpg",
+        "images/portfolio/proyecto-broadcast-6-2.jpg",
+        "images/portfolio/proyecto-broadcast-6-3.jpg",
+        "images/portfolio/proyecto-broadcast-6-4.jpg",
+        "images/portfolio/proyecto-broadcast-6-5.jpg"
+      ],
+      7: [
+        "images/portfolio/proyecto-broadcast-7-1.jpg",
+        "images/portfolio/proyecto-broadcast-7-2.png",
+        "images/portfolio/proyecto-broadcast-7-3.png",
+        "images/portfolio/proyecto-broadcast-7-4.png",
+        "images/portfolio/proyecto-broadcast-7-5.png"
+      ],
+      8: [
+        "images/portfolio/proyecto-broadcast-8-1.jpg",
+        "images/portfolio/proyecto-broadcast-8-2.jpg",
+        "images/portfolio/proyecto-broadcast-8-3.jpg",
+        "images/portfolio/proyecto-broadcast-8-4.jpg",
+        "images/portfolio/proyecto-broadcast-8-5.jpg",
+        "images/portfolio/proyecto-broadcast-8-6.jpg",
+        "images/portfolio/proyecto-broadcast-8-7.jpg",
+        "images/portfolio/proyecto-broadcast-8-8.jpg",
+        "images/portfolio/proyecto-broadcast-8-9.jpg"
+      ]
+    };
+
+    const modal = document.getElementById("portfolioModal");
+    const modalImage = document.getElementById("portfolioImage");
+    const closeButton = document.getElementById("portfolioClose");
+    const prevButton = document.getElementById("portfolioPrev");
+    const nextButton = document.getElementById("portfolioNext");
+    const dotsWrap = document.getElementById("portfolioDots");
+    const projectButtons = document.querySelectorAll(".project");
+
+    let currentProject = null;
+    let currentIndex = 0;
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    function renderDots() {
+      const images = projectImages[currentProject];
+      dotsWrap.innerHTML = "";
+
+      images.forEach((_, index) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.setAttribute("aria-label", `Ir a imagen ${index + 1}`);
+
+        if (index === currentIndex) {
+          dot.classList.add("active");
+        }
+
+        dot.addEventListener("click", () => {
+          currentIndex = index;
+          updateModalImage();
+        });
+
+        dotsWrap.appendChild(dot);
+      });
+    }
+
+    function updateModalImage() {
+      const images = projectImages[currentProject];
+      modalImage.src = images[currentIndex];
+      renderDots();
+    }
+
+    function openModal(projectId) {
+      currentProject = projectId;
+      currentIndex = 0;
+      updateModalImage();
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      modalImage.src = "";
+      dotsWrap.innerHTML = "";
+    }
+
+    function showNext() {
+      const images = projectImages[currentProject];
+      currentIndex = (currentIndex + 1) % images.length;
+      updateModalImage();
+    }
+
+    function showPrev() {
+      const images = projectImages[currentProject];
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      updateModalImage();
+    }
+
+    projectButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        openModal(button.dataset.project);
+      });
+    });
+
+    closeButton.addEventListener("click", closeModal);
+    prevButton.addEventListener("click", showPrev);
+    nextButton.addEventListener("click", showNext);
+
+    modal.addEventListener("click", (event) => {
+      if (event.target.dataset.close === "true") {
+        closeModal();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (!modal.classList.contains("open")) return;
+
+      if (event.key === "Escape") closeModal();
+      if (event.key === "ArrowRight") showNext();
+      if (event.key === "ArrowLeft") showPrev();
+    });
+
+    modal.addEventListener("touchstart", (event) => {
+      touchStartX = event.changedTouches[0].screenX;
+    });
+
+    modal.addEventListener("touchend", (event) => {
+      touchEndX = event.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) showNext();
+        else showPrev();
+      }
+    });
   </script>
 </body>
 </html>
-
