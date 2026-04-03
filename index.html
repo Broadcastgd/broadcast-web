@@ -21,10 +21,7 @@
       --line: rgba(54, 57, 48, 0.18);
       --line-light: rgba(255, 255, 255, 0.2);
       --shadow: 0 10px 28px rgba(54, 57, 48, 0.1);
-      --radius-xl: 16px;
-      --radius-lg: 16px;
-      --radius-md: 16px;
-      --radius-sm: 16px;
+      --radius: 16px;
       --container: 1280px;
       --header-height: 88px;
     }
@@ -45,6 +42,7 @@
       color: var(--text);
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
+      overflow-x: hidden;
     }
 
     a {
@@ -94,7 +92,7 @@
       gap: 10px;
       padding: 12px 22px;
       border: 3px solid var(--olive);
-      border-radius: 16px;
+      border-radius: var(--radius);
       background: transparent;
       color: var(--olive);
       font-size: 1rem;
@@ -195,8 +193,9 @@
 
     .hero-media {
       position: absolute;
-      inset: 0;
+      inset: -8% 0 -8% 0;
       z-index: 0;
+      will-change: transform;
     }
 
     .hero-media::after {
@@ -211,6 +210,7 @@
       height: 100%;
       object-fit: cover;
       object-position: center;
+      transform: scale(1.08);
     }
 
     .hero-inner {
@@ -244,46 +244,40 @@
       margin-bottom: 28px;
     }
 
-    .services-wrap {
-      background: #ead9d7;
+    .why-wrap {
+      background: #f2e4e2;
+      border-top: 1px solid rgba(54, 57, 48, 0.04);
     }
 
-    .services-grid {
+    .why-grid {
       display: grid;
-      grid-template-columns: 1fr 1.2fr;
+      grid-template-columns: 1.05fr 1fr;
       align-items: center;
-      gap: 64px;
+      gap: 42px;
+      min-height: 420px;
     }
 
-    .services-illustration {
+    .why-illustration {
       max-width: 430px;
       width: 100%;
       margin: 0 auto;
       animation: floatIllustration 5s ease-in-out infinite;
     }
 
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(150px, 1fr));
-      gap: 16px;
-      margin-top: 30px;
+    .why-content {
+      max-width: 430px;
     }
 
-    .card {
-      min-height: 94px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 18px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.4);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      box-shadow: var(--shadow);
-      font-weight: 600;
-      line-height: 1.2;
+    .why-content h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      margin-bottom: 14px;
+    }
+
+    .why-content p {
+      font-size: 1.08rem;
+      line-height: 1.35;
     }
 
     .logos {
@@ -455,7 +449,7 @@
       font-weight: 600;
       line-height: 1.15;
       cursor: pointer;
-      border-radius: 16px;
+      border-radius: var(--radius);
       transition: 0.25s ease;
       white-space: nowrap;
     }
@@ -472,9 +466,8 @@
       max-width: 860px;
       background: #f7efee;
       color: var(--text);
-      border-radius: 16px;
+      border-radius: var(--radius);
       padding: 10px;
-      box-shadow: none;
     }
 
     .service-panel.active {
@@ -489,9 +482,8 @@
     }
 
     .service-image {
-      height: 100%;
       min-height: 280px;
-      border-radius: 16px;
+      border-radius: var(--radius);
       overflow: hidden;
     }
 
@@ -568,7 +560,6 @@
       border-color: #dbe3cc;
       color: var(--olive);
       background: #edf2e4;
-      border-radius: 16px;
     }
 
     .service-cta:hover {
@@ -682,7 +673,7 @@
     }
 
     .portfolio-viewer {
-      border-radius: 16px;
+      border-radius: var(--radius);
       overflow: hidden;
       background: #ead9d7;
     }
@@ -747,21 +738,41 @@
       right: 0;
     }
 
-    @media (max-width: 1180px) {
-      .cards-grid {
-        grid-template-columns: repeat(2, minmax(150px, 1fr));
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      will-change: opacity, transform;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
       }
 
+      .reveal,
+      .services-illustration,
+      .about-graphic img,
+      .logos-track {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+      }
+    }
+
+    @media (max-width: 1180px) {
       .portfolio {
         grid-template-columns: repeat(4, 1fr);
       }
 
       .service-card {
         grid-template-columns: 1fr;
-      }
-
-      .service-image {
-        min-height: 280px;
       }
     }
 
@@ -785,25 +796,27 @@
         min-height: 84vh;
       }
 
-      .hero-media video {
-        object-position: 62% center;
+      .hero-content {
+        max-width: 460px;
       }
 
-      .services-grid,
+      .why-grid,
       .about-grid {
         grid-template-columns: 1fr;
+        gap: 28px;
       }
 
-      .services-illustration {
-        max-width: 320px;
-      }
-
+      .why-content,
       .about p {
         max-width: 100%;
       }
 
+      .why-illustration {
+        max-width: 320px;
+      }
+
       .about-graphic img {
-        max-width: 480px;
+        max-width: 470px;
       }
 
       .service-tab {
@@ -841,13 +854,9 @@
         padding-bottom: 10px;
       }
 
-      .hero-content {
-        max-width: 100%;
-      }
-
       .hero h1 {
         max-width: 320px;
-        font-size: clamp(2.4rem, 11vw, 4rem);
+        font-size: clamp(2.45rem, 12vw, 4rem);
       }
 
       .hero p {
@@ -855,8 +864,19 @@
         max-width: 300px;
       }
 
-      .cards-grid {
-        grid-template-columns: 1fr;
+      .why-grid {
+        min-height: auto;
+      }
+
+      .why-content h2,
+      .contact h2 {
+        font-size: 2.15rem;
+      }
+
+      .why-content p,
+      .contact p,
+      .section-text {
+        font-size: 1rem;
       }
 
       .portfolio {
@@ -871,12 +891,7 @@
         height: 34px;
       }
 
-      .services-tabs {
-        gap: 8px;
-      }
-
       .service-panel {
-        border-radius: 16px;
         padding: 12px;
       }
 
@@ -892,14 +907,6 @@
         padding: 72px 0;
       }
 
-      .contact h2 {
-        font-size: 2.2rem;
-      }
-
-      .contact p {
-        font-size: 1rem;
-      }
-
       .portfolio-modal-dialog {
         width: calc(100% - 16px);
         margin: 18px auto;
@@ -907,8 +914,8 @@
         border-radius: 18px;
       }
 
-      .portfolio-viewer {
-        border-radius: 14px;
+      .portfolio-viewer img {
+        aspect-ratio: 4 / 5.2;
       }
 
       .portfolio-close {
@@ -929,15 +936,9 @@
     }
 
     @keyframes floatIllustration {
-      0% {
-        transform: translateY(0px);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
-      100% {
-        transform: translateY(0px);
-      }
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
     }
   </style>
 </head>
@@ -960,7 +961,7 @@
 
   <main>
     <section class="hero" id="inicio">
-      <div class="hero-media">
+      <div class="hero-media" id="heroMedia">
         <video autoplay muted loop playsinline webkit-playsinline preload="auto">
           <source src="./video/video-broadcast-home.mp4" type="video/mp4" />
           Tu navegador no soporta videos HTML5.
@@ -968,7 +969,7 @@
       </div>
 
       <div class="hero-inner">
-        <div class="hero-content">
+        <div class="hero-content reveal">
           <h1>Estructura, claridad y propósito.</h1>
           <p>Ordenamos la comunicación visual de tu empresa.</p>
           <a class="btn btn--light btn-arrow" href="#contacto">Contactanos</a>
@@ -976,22 +977,18 @@
       </div>
     </section>
 
-    <section class="section services-wrap">
-      <div class="container services-grid">
-        <img class="services-illustration" src="images/ilustracion-broadcast.png" alt="Ilustración Broadcast" />
+    <section class="section why-wrap">
+      <div class="container why-grid">
+        <div class="reveal">
+          <img class="why-illustration" src="images/ilustracion-broadcast.png" alt="Ilustración Broadcast" />
+        </div>
 
-        <div>
-          <h2 class="section-title">Qué hacemos</h2>
-          <p class="section-text">Ordenamos y potenciamos la comunicación visual de tu empresa.</p>
-
-          <div class="cards-grid">
-            <div class="card">Branding e identidad visual</div>
-            <div class="card">Diseño web</div>
-            <div class="card">Redes sociales</div>
-            <div class="card">Presentaciones digitales</div>
-            <div class="card">Consultoría en diseño</div>
-            <div class="card">Papelería y packaging</div>
-          </div>
+        <div class="why-content reveal">
+          <h2>Por qué Broadcast</h2>
+          <p>
+            “Broadcast” significa <strong><em>transmisión</em></strong>.<br />
+            Y eso define cómo entendemos el diseño: como un medio para que las ideas lleguen claras, ordenadas y con intención.
+          </p>
         </div>
       </div>
     </section>
@@ -1034,53 +1031,53 @@
 
     <section class="section about">
       <div class="container about-grid">
-        <div>
+        <div class="reveal">
           <h2>Quiénes somos</h2>
           <p>Somos una agencia de diseño enfocada en ayudar a empresas a ordenar, mejorar y potenciar su comunicación visual.</p>
           <a class="btn btn--light btn-arrow" href="#portfolio">Conocé nuestros trabajos</a>
         </div>
 
-        <div class="about-graphic">
+        <div class="about-graphic reveal">
           <img src="images/broadcast-en-numeros.svg" alt="Broadcast en números" />
         </div>
       </div>
     </section>
 
     <section class="portfolio" id="portfolio" aria-label="Portfolio">
-      <button class="project" type="button" data-project="1" aria-label="Abrir proyecto 1">
+      <button class="project reveal" type="button" data-project="1" aria-label="Abrir proyecto 1">
         <img src="images/portfolio/proyecto-broadcast-1-1.jpg" alt="Proyecto Broadcast 1" />
       </button>
-      <button class="project" type="button" data-project="2" aria-label="Abrir proyecto 2">
+      <button class="project reveal" type="button" data-project="2" aria-label="Abrir proyecto 2">
         <img src="images/portfolio/proyecto-broadcast-2-1.jpg" alt="Proyecto Broadcast 2" />
       </button>
-      <button class="project" type="button" data-project="3" aria-label="Abrir proyecto 3">
+      <button class="project reveal" type="button" data-project="3" aria-label="Abrir proyecto 3">
         <img src="images/portfolio/proyecto-broadcast-3-1.jpg" alt="Proyecto Broadcast 3" />
       </button>
-      <button class="project" type="button" data-project="4" aria-label="Abrir proyecto 4">
+      <button class="project reveal" type="button" data-project="4" aria-label="Abrir proyecto 4">
         <img src="images/portfolio/proyecto-broadcast-4-1.jpg" alt="Proyecto Broadcast 4" />
       </button>
-      <button class="project" type="button" data-project="5" aria-label="Abrir proyecto 5">
+      <button class="project reveal" type="button" data-project="5" aria-label="Abrir proyecto 5">
         <img src="images/portfolio/proyecto-broadcast-5-1.jpg" alt="Proyecto Broadcast 5" />
       </button>
-      <button class="project" type="button" data-project="6" aria-label="Abrir proyecto 6">
+      <button class="project reveal" type="button" data-project="6" aria-label="Abrir proyecto 6">
         <img src="images/portfolio/proyecto-broadcast-6-1.jpg" alt="Proyecto Broadcast 6" />
       </button>
-      <button class="project" type="button" data-project="7" aria-label="Abrir proyecto 7">
+      <button class="project reveal" type="button" data-project="7" aria-label="Abrir proyecto 7">
         <img src="images/portfolio/proyecto-broadcast-7-1.jpg" alt="Proyecto Broadcast 7" />
       </button>
-      <button class="project" type="button" data-project="8" aria-label="Abrir proyecto 8">
+      <button class="project reveal" type="button" data-project="8" aria-label="Abrir proyecto 8">
         <img src="images/portfolio/proyecto-broadcast-8-1.jpg" alt="Proyecto Broadcast 8" />
       </button>
     </section>
 
     <section class="section services-feature" id="servicios-destacados">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head reveal">
           <p class="services-kicker">Conocé nuestros</p>
           <h2 class="section-title">Servicios</h2>
         </div>
 
-        <div class="services-tabs" role="tablist" aria-label="Servicios">
+        <div class="services-tabs reveal" role="tablist" aria-label="Servicios">
           <button class="service-tab active" type="button" role="tab" aria-selected="true" data-service="branding">Branding e identidad visual</button>
           <button class="service-tab" type="button" role="tab" aria-selected="false" data-service="presentaciones">Presentaciones digitales</button>
           <button class="service-tab" type="button" role="tab" aria-selected="false" data-service="consultoria">Consultoría en diseño</button>
@@ -1089,7 +1086,7 @@
           <button class="service-tab" type="button" role="tab" aria-selected="false" data-service="packaging">Papelería y packaging</button>
         </div>
 
-        <div class="service-panel active" data-panel="branding">
+        <div class="service-panel active reveal" data-panel="branding">
           <div class="service-card">
             <div class="service-image">
               <img src="images/servicios/Branding-identidad-visual.png" alt="Branding e identidad visual" />
@@ -1099,7 +1096,6 @@
               <h3 class="service-title">Branding e identidad visual</h3>
               <p class="service-description">Desarrollamos sistemas de identidad visual que permiten construir una comunicación coherente, reconocible y profesional.</p>
               <p class="service-extra">El proceso incluye análisis del posicionamiento, definición conceptual y desarrollo visual.</p>
-
               <div class="service-includes">
                 <h4>Incluye:</h4>
                 <ul>
@@ -1109,7 +1105,6 @@
                   <li>Manual de uso</li>
                 </ul>
               </div>
-
               <div class="service-footer">
                 <a class="service-cta" href="#contacto">Solicitar servicio</a>
               </div>
@@ -1127,7 +1122,6 @@
               <h3 class="service-title">Presentaciones institucionales y brochures</h3>
               <p class="service-description">Diseñamos presentaciones y documentos corporativos orientados a comunicar información de forma clara, estructurada y profesional. Trabajamos especialmente en contextos donde la información debe ser evaluada, como reuniones comerciales, propuestas a clientes o procesos internos.</p>
               <p class="service-extra">Dentro de esta categoría, desarrollamos brochures institucionales para empresas que necesitan presentarse en licitaciones o registrarse como proveedores en plataformas como Ariba o Avetta. Cada presentación se construye a partir del análisis y organización del contenido, asegurando el cumplimiento de los requisitos solicitados de cada sistema.</p>
-
               <div class="service-footer">
                 <a class="service-cta" href="#contacto">Solicitar servicio</a>
               </div>
@@ -1145,7 +1139,6 @@
               <h3 class="service-title">Auditoría de diseño “¿Decora o Funciona?”</h3>
               <p class="service-description">Analizamos la comunicación visual de la empresa para identificar si el diseño está cumpliendo su función o si solo responde a una cuestión estética. Evaluamos la claridad del mensaje, la relación entre piezas y la forma en que se presenta la información.</p>
               <p class="service-extra">A partir de este diagnóstico, proponemos mejoras concretas que permiten optimizar la comunicación y alinear el diseño con los objetivos del negocio.</p>
-
               <div class="service-includes">
                 <h4>Incluye:</h4>
                 <ul>
@@ -1156,7 +1149,6 @@
                   <li>Recomendaciones accionables</li>
                 </ul>
               </div>
-
               <div class="service-footer">
                 <a class="service-cta" href="#contacto">Solicitar servicio</a>
               </div>
@@ -1175,7 +1167,6 @@
               <p class="service-description">Diseñamos sitios web priorizando la estructura del contenido, la experiencia de usuario y la claridad en la navegación.</p>
               <p class="service-extra">Cada proyecto se desarrolla en función de los objetivos del cliente, buscando que la información sea fácilmente accesible y comprensible.</p>
               <p class="service-extra">Trabajamos en plataformas como Wix, Tienda Nube y WordPress, y también desarrollamos prototipos en Figma para equipos de programación, aplicando criterios de UX/UI que aseguran una correcta implementación y funcionamiento del sitio.</p>
-
               <div class="service-footer">
                 <a class="service-cta" href="#contacto">Solicitar servicio</a>
               </div>
@@ -1193,7 +1184,6 @@
               <h3 class="service-title">Diseño para redes sociales</h3>
               <p class="service-description">Creamos sistemas visuales para redes sociales que permiten mantener una comunicación coherente y sostenida en el tiempo.</p>
               <p class="service-extra">No se trata solo de piezas aisladas, sino de construir una identidad dentro del entorno digital.</p>
-
               <div class="service-includes">
                 <h4>Incluye:</h4>
                 <ul>
@@ -1204,7 +1194,6 @@
                   <li>Archivos editables para equipos o community managers</li>
                 </ul>
               </div>
-
               <div class="service-footer">
                 <a class="service-cta" href="#contacto">Solicitar servicio</a>
               </div>
@@ -1223,7 +1212,6 @@
               <p class="service-description">Diseñamos piezas físicas que extienden la identidad de tu marca más allá de lo digital, generando una experiencia coherente en cada punto de contacto.</p>
               <p class="service-extra">El objetivo es que cada elemento, desde una etiqueta hasta un packaging completo, comunique con claridad, refuerce el posicionamiento y aporte valor percibido al producto.</p>
               <p class="service-extra">Trabajamos desde la conceptualización hasta el diseño final, contemplando materiales, formatos y sistemas de impresión para asegurar un resultado funcional y profesional.</p>
-
               <div class="service-includes">
                 <h4>Incluye:</h4>
                 <ul>
@@ -1234,7 +1222,6 @@
                   <li>Archivos finales listos para producción</li>
                 </ul>
               </div>
-
               <div class="service-footer">
                 <a class="service-cta" href="#contacto">Solicitar servicio</a>
               </div>
@@ -1245,7 +1232,7 @@
     </section>
 
     <section id="contacto" class="contact">
-      <div class="container">
+      <div class="container reveal">
         <h2>Hablemos de tu marca</h2>
         <p>Si querés mejorar la comunicación visual de tu marca, escribinos y armamos una propuesta a medida.</p>
 
@@ -1259,8 +1246,7 @@
     </section>
 
     <section class="reviews">
-      <div class="container">
-        <!-- Elfsight Google Reviews | Untitled Google Reviews -->
+      <div class="container reveal">
         <script src="https://elfsightcdn.com/platform.js" async></script>
         <div class="elfsight-app-012e40b1-ac86-4fe3-9c7b-0bb323322f47" data-elfsight-app-lazy></div>
       </div>
@@ -1268,7 +1254,7 @@
   </main>
 
   <footer class="footer">
-    <div class="footer-inner">
+    <div class="footer-inner reveal">
       <div class="footer-brand">
         <img src="images/logo-broadcast-claro.svg" alt="Broadcast" />
         <span>Broadcast</span>
@@ -1287,13 +1273,10 @@
 
     <div class="portfolio-modal-dialog" role="dialog" aria-modal="true" aria-label="Galeria de proyecto">
       <button class="portfolio-close" type="button" id="portfolioClose" aria-label="Cerrar">×</button>
-
       <div class="portfolio-viewer">
         <img id="portfolioImage" src="" alt="Proyecto ampliado" />
       </div>
-
       <div class="portfolio-dots" id="portfolioDots"></div>
-
       <button class="portfolio-hit portfolio-hit-prev" type="button" id="portfolioPrev" aria-label="Imagen anterior"></button>
       <button class="portfolio-hit portfolio-hit-next" type="button" id="portfolioNext" aria-label="Siguiente imagen"></button>
     </div>
@@ -1301,6 +1284,7 @@
 
   <script>
     const header = document.getElementById("siteHeader");
+    const heroMedia = document.getElementById("heroMedia");
 
     function updateHeader() {
       if (window.scrollY > 40) {
@@ -1310,8 +1294,15 @@
       }
     }
 
+    function updateHeroParallax() {
+      const offset = Math.min(window.scrollY * 0.22, 120);
+      heroMedia.style.transform = `translateY(${offset}px)`;
+    }
+
     updateHeader();
+    updateHeroParallax();
     window.addEventListener("scroll", updateHeader);
+    window.addEventListener("scroll", updateHeroParallax);
 
     const tabs = document.querySelectorAll(".service-tab");
     const panels = document.querySelectorAll(".service-panel");
@@ -1335,6 +1326,7 @@
         const activePanel = document.querySelector(`.service-panel[data-panel="${target}"]`);
         if (activePanel) {
           activePanel.classList.add("active");
+          activePanel.classList.add("is-visible");
         }
       });
     });
@@ -1432,16 +1424,11 @@
         const dot = document.createElement("button");
         dot.type = "button";
         dot.setAttribute("aria-label", `Ir a imagen ${index + 1}`);
-
-        if (index === currentIndex) {
-          dot.classList.add("active");
-        }
-
+        if (index === currentIndex) dot.classList.add("active");
         dot.addEventListener("click", () => {
           currentIndex = index;
           updateModalImage();
         });
-
         dotsWrap.appendChild(dot);
       });
     }
@@ -1482,9 +1469,7 @@
     }
 
     projectButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        openModal(button.dataset.project);
-      });
+      button.addEventListener("click", () => openModal(button.dataset.project));
     });
 
     closeButton.addEventListener("click", closeModal);
@@ -1492,14 +1477,11 @@
     nextButton.addEventListener("click", showNext);
 
     modal.addEventListener("click", (event) => {
-      if (event.target.dataset.close === "true") {
-        closeModal();
-      }
+      if (event.target.dataset.close === "true") closeModal();
     });
 
     document.addEventListener("keydown", (event) => {
       if (!modal.classList.contains("open")) return;
-
       if (event.key === "Escape") closeModal();
       if (event.key === "ArrowRight") showNext();
       if (event.key === "ArrowLeft") showPrev();
@@ -1512,11 +1494,26 @@
     modal.addEventListener("touchend", (event) => {
       touchEndX = event.changedTouches[0].screenX;
       const diff = touchStartX - touchEndX;
-
       if (Math.abs(diff) > 40) {
         if (diff > 0) showNext();
         else showPrev();
       }
+    });
+
+    const revealItems = document.querySelectorAll(".reveal");
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealItems.forEach((item, index) => {
+      item.style.transitionDelay = `${Math.min(index * 0.04, 0.24)}s`;
+      revealObserver.observe(item);
     });
   </script>
 </body>
