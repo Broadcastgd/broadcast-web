@@ -358,11 +358,12 @@
       animation: floatIllustration 5s ease-in-out infinite;
     }
 
-    .portfolio {
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
-      overflow: hidden;
-    }
+.portfolio {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  overflow: hidden;
+  gap: 0; /* agregá esto */
+}
 
     .project {
       position: relative;
@@ -1044,28 +1045,28 @@
     </section>
 
     <section class="portfolio" id="portfolio" aria-label="Portfolio">
-      <button class="project reveal" type="button" data-project="1" aria-label="Abrir proyecto 1">
+      <button class="project" type="button" data-project="1" aria-label="Abrir proyecto 1">
         <img src="images/portfolio/proyecto-broadcast-1-1.jpg" alt="Proyecto Broadcast 1" />
       </button>
-      <button class="project reveal" type="button" data-project="2" aria-label="Abrir proyecto 2">
+      <button class="project" type="button" data-project="2" aria-label="Abrir proyecto 2">
         <img src="images/portfolio/proyecto-broadcast-2-1.jpg" alt="Proyecto Broadcast 2" />
       </button>
-      <button class="project reveal" type="button" data-project="3" aria-label="Abrir proyecto 3">
+      <button class="project" type="button" data-project="3" aria-label="Abrir proyecto 3">
         <img src="images/portfolio/proyecto-broadcast-3-1.jpg" alt="Proyecto Broadcast 3" />
       </button>
-      <button class="project reveal" type="button" data-project="4" aria-label="Abrir proyecto 4">
+      <button class="project" type="button" data-project="4" aria-label="Abrir proyecto 4">
         <img src="images/portfolio/proyecto-broadcast-4-1.jpg" alt="Proyecto Broadcast 4" />
       </button>
-      <button class="project reveal" type="button" data-project="5" aria-label="Abrir proyecto 5">
+      <button class="project" type="button" data-project="5" aria-label="Abrir proyecto 5">
         <img src="images/portfolio/proyecto-broadcast-5-1.jpg" alt="Proyecto Broadcast 5" />
       </button>
-      <button class="project reveal" type="button" data-project="6" aria-label="Abrir proyecto 6">
+      <button class="project" type="button" data-project="6" aria-label="Abrir proyecto 6">
         <img src="images/portfolio/proyecto-broadcast-6-1.jpg" alt="Proyecto Broadcast 6" />
       </button>
-      <button class="project reveal" type="button" data-project="7" aria-label="Abrir proyecto 7">
+      <button class="project" type="button" data-project="7" aria-label="Abrir proyecto 7">
         <img src="images/portfolio/proyecto-broadcast-7-1.jpg" alt="Proyecto Broadcast 7" />
       </button>
-      <button class="project reveal" type="button" data-project="8" aria-label="Abrir proyecto 8">
+      <button class="project" type="button" data-project="8" aria-label="Abrir proyecto 8">
         <img src="images/portfolio/proyecto-broadcast-8-1.jpg" alt="Proyecto Broadcast 8" />
       </button>
     </section>
